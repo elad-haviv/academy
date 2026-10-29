@@ -1,0 +1,73 @@
+{
+  "title": "TypeScript למפתחים עובדים",
+  "subtitle": "לא עוד קורס syntax: איך TypeScript מונע באגים בקוד שכבר רץ בפרודקשן.",
+  "description": "TypeScript לא נועד להיות שפה חדשה שתלמדו מאפס — הוא כלי שמטרתו לתפוס טעויות לפני שהן מגיעות למשתמש. בקורס הזה נתמקד במה שמשנה קוד אמיתי: צמצום טיפוסים, מודלים לדומיין, generics שמפחיתים שכפול, ומקומות שבהם TypeScript לא מגן עליכם בכלל.\n\nהקורס מניח שאתם יודעים JavaScript ומריצים פרויקט עם `tsc` או bundler. אין בו הסברים על `let` ו-`const`.",
+  "level": "Intermediate",
+  "language": "he",
+  "tags": [
+    "TypeScript",
+    "JavaScript",
+    "פיתוח"
+  ],
+  "kind": "course",
+  "externalUrl": null,
+  "status": "published",
+  "featured": true,
+  "sort": 2,
+  "modules": [
+    {
+      "title": "המעבר",
+      "summary": "מה TypeScript נותן בפועל, ואיך הוא באמת חושב.",
+      "lessons": [
+        {
+          "slug": "what-ts-buys",
+          "title": "מה TypeScript נותן לכם בפועל",
+          "minutes": 8,
+          "file": "01-what-ts-buys.md"
+        },
+        {
+          "slug": "narrowing",
+          "title": "צמצום טיפוסים: הלב של TypeScript",
+          "minutes": 12,
+          "file": "02-narrowing.md"
+        }
+      ]
+    },
+    {
+      "title": "מודלים",
+      "summary": "לתאר את העולם בטיפוסים במקום להסתמך על זיכרון.",
+      "lessons": [
+        {
+          "slug": "modelling-domain",
+          "title": "לתאר דומיין בטיפוסים",
+          "minutes": 11,
+          "file": "03-modelling-domain.md"
+        },
+        {
+          "slug": "generics",
+          "title": "Generics בלי לפחד",
+          "minutes": 12,
+          "file": "04-generics.md"
+        }
+      ]
+    },
+    {
+      "title": "בפרויקט אמיתי",
+      "summary": "strict mode, גבול האמון, ומה TypeScript לא בודק.",
+      "lessons": [
+        {
+          "slug": "strict-mode",
+          "title": "strict: true בלי לשבור הכל",
+          "minutes": 10,
+          "file": "05-strict-mode.md"
+        },
+        {
+          "slug": "trust-boundary",
+          "title": "גבול האמון: מה TypeScript לא בודק",
+          "minutes": 11,
+          "file": "06-trust-boundary.md"
+        }
+      ]
+    }
+  ]
+}

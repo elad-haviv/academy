@@ -1,0 +1,62 @@
+{
+  "title": "להעלות אפליקציית Node לאוויר",
+  "subtitle": "קונפיגורציה, לוגים, תהליכים ובדיקות בריאות — מה שבין \"עובד אצלי\" לשרת שמחזיק.",
+  "description": "כתיבת אפליקציה היא חצי מהעבודה. החצי השני הוא לגרום לה לרוץ שבועות בלי שתדרוש אתכם באמצע הלילה. הקורס הזה עוסק בדיוק בזה: מה נכנס לקונפיגורציה, איך נראים לוגים שאפשר לחפש בהם, איך מתנהל תהליך נכון מאחורי פרוקסי, ואיך מודדים שהאפליקציה באמת חיה.\n\nהקורס לא תלוי בספק ענן מסוים — הדוגמאות עובדות בכל שרת לינוקס, ב-Docker או בפלטפורמת PaaS.",
+  "level": "Intermediate",
+  "language": "he",
+  "tags": [
+    "Node.js",
+    "DevOps",
+    "פריסה",
+    "תפעול"
+  ],
+  "kind": "course",
+  "externalUrl": null,
+  "status": "published",
+  "featured": true,
+  "sort": 3,
+  "modules": [
+    {
+      "title": "לפני שמעלים",
+      "summary": "החלטות שמתקבלות פעם אחת ואז משפיעות על הכל.",
+      "lessons": [
+        {
+          "slug": "configuration",
+          "title": "קונפיגורציה: מה שייך למשתני סביבה",
+          "minutes": 10,
+          "file": "01-configuration.md"
+        },
+        {
+          "slug": "logging",
+          "title": "לוגים שאפשר לחפש בהם",
+          "minutes": 11,
+          "file": "02-logging.md"
+        }
+      ]
+    },
+    {
+      "title": "בשרת",
+      "summary": "תהליכים, פרוקסי, בדיקות בריאות ופריסה.",
+      "lessons": [
+        {
+          "slug": "process-and-port",
+          "title": "תהליכים, פורטים והרשאות",
+          "minutes": 11,
+          "file": "03-process-and-port.md"
+        },
+        {
+          "slug": "health-and-version",
+          "title": "בדיקות בריאות וגרסאות",
+          "minutes": 10,
+          "file": "04-health-and-version.md"
+        },
+        {
+          "slug": "deploy-without-drama",
+          "title": "פריסה בלי רגע של אי־ודאות",
+          "minutes": 12,
+          "file": "05-deploy-without-drama.md"
+        }
+      ]
+    }
+  ]
+}
