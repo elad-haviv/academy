@@ -166,8 +166,8 @@ main { display: block; }
 
 /* ---------- hero ---------- */
 
-.hero { padding-block: 72px 56px; border-bottom: 1px solid var(--rule); }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 56px; align-items: end; }
+.hero { padding-block: 60px 52px; border-bottom: 1px solid var(--rule); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 64px; align-items: end; }
 .hero h1 { max-width: 20ch; }
 .hero .lede {
   font-size: 1.14rem;
@@ -177,11 +177,13 @@ main { display: block; }
 }
 .hero-actions { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
 .hero-ledger {
+  align-self: end;
   border-top: 3px solid transparent;
   border-image: linear-gradient(90deg, #096fe0 0%, #26b9c1 52%, #3df5a7 100%) 1;
   padding-top: 12px;
 }
 .hero-ledger .caption {
+  margin-top: 2px;
   font-size: 0.78rem;
   font-family: 'IBM Plex Mono', monospace;
   color: var(--ink-faint);
