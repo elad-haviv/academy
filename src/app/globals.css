@@ -230,7 +230,8 @@ main { display: block; }
 }
 .ledger-row:hover { background: color-mix(in srgb, var(--surface) 70%, transparent); }
 .ledger-row .idx { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-faint); padding-top: 4px; }
-.ledger-row .title { font-family: 'Frank Ruhl Libre', serif; font-size: 1.22rem; font-weight: 700; line-height: 1.25; }
+.ledger-row .title { font-family: 'Frank Ruhl Libre', serif; font-size: 1.24rem; font-weight: 700; line-height: 1.25; border-bottom: 1px solid transparent; }
+.ledger-row:hover .title { border-bottom-color: var(--ink); }
 .ledger-row .desc { color: var(--ink-soft); font-size: 0.94rem; margin-top: 4px; }
 .ledger-row .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
 .ledger-row .level { font-size: 0.86rem; color: var(--ink-soft); }
@@ -406,7 +407,7 @@ main { display: block; }
 .auth-switch a { color: var(--blueprint); }
 
 .stat-strip { display: flex; flex-wrap: wrap; gap: 34px; padding-block: 22px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); }
-.stat-strip div { display: flex; align-items: baseline; gap: 8px; }
+.stat-strip div { display: flex; align-items: baseline; gap: 8px; flex-direction: row; }
 .stat-strip b { font-family: 'Frank Ruhl Libre', serif; font-size: 1.7rem; font-weight: 700; }
 .stat-strip span { font-size: 0.86rem; color: var(--ink-soft); }
 

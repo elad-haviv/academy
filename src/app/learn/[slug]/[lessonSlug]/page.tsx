@@ -71,7 +71,7 @@ export default function LessonPage({ params }: { params: { slug: string; lessonS
         <p className="lede">{lesson.minutes} דקות קריאה</p>
 
         {!user ? (
-          <div className="notice">
+          <div className="notice" style={{ maxWidth: 'var(--reading)' }}>
             <Link href={`/login?next=${encodeURIComponent(`/learn/${course.slug}/${lesson.slug}`)}`} style={{ color: 'var(--blueprint)' }}>
               התחברו
             </Link>{' '}
