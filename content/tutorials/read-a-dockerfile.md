@@ -3,7 +3,7 @@ title: לקרוא Dockerfile בחמש דקות
 excerpt: עשר הוראות, ולמה הסדר שלהן חשוב יותר מהתוכן. מדריך קריאה מהיר לכל Dockerfile שתפגשו.
 tags: Docker, DevOps
 level: Beginner
-minutes: 6
+minutes: 2
 published: 2026-10-26
 category: devops
 tracks: developer, engineer

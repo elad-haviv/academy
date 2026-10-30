@@ -1,3 +1,4 @@
+import { countLabel } from '@/lib/format';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Progress } from '@/components/Progress';
@@ -23,7 +24,7 @@ export default function DashboardPage() {
           <h1>שלום, {user.name.split(' ')[0]}</h1>
           <p>
             {enrolled.length
-              ? `יש לך ${enrolled.length} קורסים פעילים ו־${completed} שיעורים שסימנת. ממשיכים מהמקום שעצרת.`
+              ? `${countLabel(enrolled.length, 'קורס פעיל', 'קורסים פעילים')} ו־${countLabel(completed, 'שיעור שסימנת', 'שיעורים שסימנת')}. ממשיכים מהמקום שעצרת.`
               : 'עוד לא התחלת קורס. בחרו אחד מהקטלוג — ההתקדמות תישמר כאן.'}
           </p>
         </div>

@@ -28,14 +28,14 @@
         {
           "slug": "image-vs-container",
           "title": "דימוי ומכולה: מה באמת קורה",
-          "minutes": 9,
+          "minutes": 2,
           "file": "01-image-vs-container.md",
           "is_preview": true
         },
         {
           "slug": "first-dockerfile",
           "title": "Dockerfile ראשון שעובד",
-          "minutes": 12,
+          "minutes": 2,
           "file": "02-first-dockerfile.md"
         }
       ]
@@ -47,13 +47,13 @@
         {
           "slug": "layers-and-cache",
           "title": "שכבות וקאש",
-          "minutes": 10,
+          "minutes": 2,
           "file": "03-layers-and-cache.md"
         },
         {
           "slug": "multistage",
           "title": "Multi-stage: אימג׳ קטן שלא שבור",
-          "minutes": 11,
+          "minutes": 2,
           "file": "04-multistage.md"
         }
       ]
@@ -65,13 +65,13 @@
         {
           "slug": "ports-volumes-env",
           "title": "פורטים, כרכים ומשתני סביבה",
-          "minutes": 10,
+          "minutes": 2,
           "file": "05-ports-volumes-env.md"
         },
         {
           "slug": "compose",
           "title": "Compose: מערכת שלמה בקובץ אחד",
-          "minutes": 12,
+          "minutes": 2,
           "file": "06-compose.md"
         }
       ]

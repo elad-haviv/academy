@@ -134,7 +134,13 @@ export default function LessonPage({ params }: { params: { slug: string; lessonS
         ) : null}
 
         {!gated ? (
-          <div className="lesson-foot">
+          <>
+            {!user ? (
+              <p className="lesson-nudge">
+                קראתם עד הסוף? <Link href="/register">פתיחת חשבון</Link> — בחינם — שומרת איפה עצרתם בכל מכשיר.
+              </p>
+            ) : null}
+            <div className="lesson-foot">
             {user ? (
               <form action={completeLessonAction}>
                 <input type="hidden" name="course" value={course.slug} />
@@ -166,6 +172,7 @@ export default function LessonPage({ params }: { params: { slug: string; lessonS
               )}
             </div>
           </div>
+          </>
         ) : null}
       </div>
     </div>

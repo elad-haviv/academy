@@ -29,14 +29,14 @@
         {
           "slug": "configuration",
           "title": "קונפיגורציה: מה שייך למשתני סביבה",
-          "minutes": 10,
+          "minutes": 2,
           "file": "01-configuration.md",
           "is_preview": true
         },
         {
           "slug": "logging",
           "title": "לוגים שאפשר לחפש בהם",
-          "minutes": 11,
+          "minutes": 2,
           "file": "02-logging.md"
         }
       ]
@@ -48,19 +48,19 @@
         {
           "slug": "process-and-port",
           "title": "תהליכים, פורטים והרשאות",
-          "minutes": 11,
+          "minutes": 2,
           "file": "03-process-and-port.md"
         },
         {
           "slug": "health-and-version",
           "title": "בדיקות בריאות וגרסאות",
-          "minutes": 10,
+          "minutes": 2,
           "file": "04-health-and-version.md"
         },
         {
           "slug": "deploy-without-drama",
           "title": "פריסה בלי רגע של אי־ודאות",
-          "minutes": 12,
+          "minutes": 2,
           "file": "05-deploy-without-drama.md"
         }
       ]

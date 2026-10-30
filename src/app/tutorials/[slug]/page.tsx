@@ -16,7 +16,7 @@ export default function TutorialPage({ params }: { params: { slug: string } }) {
   const related = listTutorials().filter((item) => item.slug !== tutorial.slug).slice(0, 3);
 
   return (
-    <div className="wrap course-grid" style={{ gridTemplateColumns: 'minmax(0,1fr) 260px' }}>
+    <div className="wrap course-grid article-grid">
       <article className="course-body">
         <div className="crumb mono" style={{ fontSize: '0.76rem', color: 'var(--ink-faint)' }}>
           {formatDate(tutorial.published)} · {tutorial.minutes} דקות קריאה · {tutorial.level === 'Beginner' ? 'מתחילים' : tutorial.level}

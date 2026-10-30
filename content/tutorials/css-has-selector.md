@@ -3,7 +3,7 @@ title: "CSS :has() — הסלקטור שמחליף JavaScript"
 excerpt: בחירת הורה לפי מה שיש בתוכו, בלי קוד. שימושים אמיתיים: טפסים, כרטיסים, ניווט, מצבים ריקים.
 tags: CSS, Frontend
 level: Intermediate
-minutes: 6
+minutes: 2
 published: 2026-10-08
 category: software
 tracks: developer

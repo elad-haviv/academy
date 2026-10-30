@@ -3,7 +3,7 @@ title: git rebase בלי פחד
 excerpt: מה rebase באמת עושה לעץ, מתי הוא בטוח, ואיך יוצאים ממנו כשהוא משתבש.
 tags: Git
 level: Beginner
-minutes: 7
+minutes: 2
 published: 2026-10-21
 category: software
 tracks: developer

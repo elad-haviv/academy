@@ -51,7 +51,7 @@ export default function CoursesPage({
             </Link>
           ))}
         </div>
-        <div className="chips" style={{ marginTop: 0 }}>
+        <div className="chips chips-tracks" style={{ marginTop: 0 }}>
           <span className="chips-label">מסלולים:</span>
           {TRACKS.map((item) => (
             <Link key={item.slug} href={`/tracks/${item.slug}`} data-active={track === item.slug ? 'true' : 'false'}>
@@ -62,7 +62,7 @@ export default function CoursesPage({
 
         <CourseFilterBar action="/courses" values={{ q, level, category, track, access, sort, tag }} count={courses.length} />
 
-        <div className="chips">
+        <div className="chips chips-tags">
           <Link href={category ? `/courses?category=${category}` : '/courses'} data-active={tag ? 'false' : 'true'}>
             הכל
           </Link>

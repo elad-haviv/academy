@@ -3,7 +3,7 @@ title: קובץ README שנקרא עד הסוף
 excerpt: הסדר שבו קוראים README, ומה חייב להיות בעשר השורות הראשונות כדי שמישהו יריץ את הפרויקט שלכם.
 tags: תיעוד, Git
 level: Beginner
-minutes: 5
+minutes: 2
 published: 2026-09-30
 category: career
 tracks: developer, student

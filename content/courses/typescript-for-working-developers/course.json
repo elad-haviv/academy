@@ -27,14 +27,14 @@
         {
           "slug": "what-ts-buys",
           "title": "מה TypeScript נותן לכם בפועל",
-          "minutes": 8,
+          "minutes": 2,
           "file": "01-what-ts-buys.md",
           "is_preview": true
         },
         {
           "slug": "narrowing",
           "title": "צמצום טיפוסים: הלב של TypeScript",
-          "minutes": 12,
+          "minutes": 2,
           "file": "02-narrowing.md"
         }
       ]
@@ -46,13 +46,13 @@
         {
           "slug": "modelling-domain",
           "title": "לתאר דומיין בטיפוסים",
-          "minutes": 11,
+          "minutes": 2,
           "file": "03-modelling-domain.md"
         },
         {
           "slug": "generics",
           "title": "Generics בלי לפחד",
-          "minutes": 12,
+          "minutes": 2,
           "file": "04-generics.md"
         }
       ]
@@ -64,13 +64,13 @@
         {
           "slug": "strict-mode",
           "title": "strict: true בלי לשבור הכל",
-          "minutes": 10,
+          "minutes": 2,
           "file": "05-strict-mode.md"
         },
         {
           "slug": "trust-boundary",
           "title": "גבול האמון: מה TypeScript לא בודק",
-          "minutes": 11,
+          "minutes": 2,
           "file": "06-trust-boundary.md"
         }
       ]

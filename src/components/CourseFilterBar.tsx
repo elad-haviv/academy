@@ -1,3 +1,4 @@
+import { countLabel } from '@/lib/format';
 import { CATEGORIES, LEVELS, TRACKS } from '@/lib/taxonomy';
 
 export type CourseFilterValues = {
@@ -44,6 +45,12 @@ export function CourseFilterBar({
   const showTrack = !fixed.includes('track');
 
   return (
+    <div className="filters-shell">
+      <input type="checkbox" id="filters-open" className="filters-input" aria-label="פתיחת סינון" />
+      <label htmlFor="filters-open" className="filters-toggle">
+        <span>סינון וחיפוש</span>
+        <span className="count">{countLabel(count, 'קורס', 'קורסים')}</span>
+      </label>
     <form className="filters" method="get" action={action} role="search">
       <label className="sr-only" htmlFor="q">
         חיפוש קורס
@@ -125,7 +132,8 @@ export function CourseFilterBar({
       <button type="submit" className="btn small">
         סינון
       </button>
-      <span className="count">{count} קורסים</span>
+      <span className="count">{countLabel(count, 'קורס', 'קורסים')}</span>
     </form>
+    </div>
   );
 }

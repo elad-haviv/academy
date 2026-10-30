@@ -70,8 +70,8 @@ export default function HomePage() {
             <span>מדריכים</span>
           </div>
           <div>
-            <b>{stats.hours}</b>
-            <span>שעות תוכן</span>
+            <b>{stats.minutes < 60 ? stats.minutes : stats.hours}</b>
+            <span>{stats.minutes < 60 ? 'דקות תוכן' : stats.hours === 1 ? 'שעת תוכן' : 'שעות תוכן'}</span>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function LabsPage() {
               <p style={{ fontSize: '0.9rem' }}>{lab.description.slice(0, 180)}…</p>
               <div className="card-foot">
                 <span className="stat">
-                  {lab.status === 'in-development' ? 'בבנייה' : `פתוחה · ${formatMinutes(lab.minutes)}`}
+                  {lab.status === 'in-development' ? 'בבנייה' : lab.minutes ? `פתוחה · ${formatMinutes(lab.minutes)}` : 'פתוחה'}
                 </span>
                 <Link href={`/labs/${lab.slug}`} className="btn ghost small">
                   {lab.status === 'in-development' ? 'מה בתכנון' : 'כניסה'}

@@ -3,7 +3,7 @@ title: SSH בלי סיסמאות: מפתחות בחמש דקות
 excerpt: יצירת מפתח, העלאה לשרת, קובץ config שמקצר את החיים, ומה עושים כשמסרבים להתחבר.
 tags: SSH, DevOps, אבטחה
 level: Beginner
-minutes: 5
+minutes: 2
 published: 2026-10-14
 category: devops
 tracks: developer, engineer

@@ -366,7 +366,8 @@ export function getTutorial(slug: string) {
 }
 
 export function allTags(): string[] {
-  const rows = db().prepare("SELECT tags FROM courses WHERE kind = 'course' UNION ALL SELECT tags FROM tutorials").all() as any[];
+  // courses only: a tag that exists on tutorials alone lands the catalog on an empty result
+  const rows = db().prepare("SELECT tags FROM courses WHERE kind = 'course'").all() as any[];
   const set = new Set<string>();
   for (const row of rows) {
     for (const tag of String(row.tags ?? '').split(',')) {
@@ -384,7 +385,7 @@ export function siteStats() {
   const tutorials = (db().prepare('SELECT COUNT(*) AS c FROM tutorials').get() as any).c as number;
   const learners = (db().prepare('SELECT COUNT(*) AS c FROM users').get() as any).c as number;
   const minutes = (db().prepare("SELECT COALESCE(SUM(minutes), 0) AS m FROM courses WHERE kind = 'course'").get() as any).m as number;
-  return { courses, lessons, labs, tutorials, learners, hours: Math.round(minutes / 60) };
+  return { courses, lessons, labs, tutorials, learners, minutes, hours: Math.round(minutes / 60) };
 }
 
 export function userCompletionsCount(userId: number): number {

@@ -11,8 +11,8 @@ type MarkProps = {
  * rather than one clipped path so the mark can be inlined many times per page.
  */
 export function Mark({ size = 32, mono = false, className, title = 'Haviv Academy' }: MarkProps) {
-  const left = 'M 11 8 H 17 A 3 3 0 0 1 20 11 V 26 H 31.2 V 38 H 20 V 53 A 3 3 0 0 1 17 56 H 11 A 3 3 0 0 1 8 53 V 11 A 3 3 0 0 1 11 8 Z';
-  const right = 'M 32.8 26 H 44 V 11 A 3 3 0 0 1 47 8 H 53 A 3 3 0 0 1 56 11 V 53 A 3 3 0 0 1 53 56 H 47 A 3 3 0 0 1 44 53 V 38 H 32.8 Z';
+  const left = 'M 11 8 H 17 A 3 3 0 0 1 20 11 V 26 H 30.7 V 38 H 20 V 53 A 3 3 0 0 1 17 56 H 11 A 3 3 0 0 1 8 53 V 11 A 3 3 0 0 1 11 8 Z';
+  const right = 'M 33.3 26 H 44 V 11 A 3 3 0 0 1 47 8 H 53 A 3 3 0 0 1 56 11 V 53 A 3 3 0 0 1 53 56 H 47 A 3 3 0 0 1 44 53 V 38 H 33.3 Z';
   const a = mono ? 'currentColor' : '#9de501';
   const b = mono ? 'currentColor' : '#04bde6';
   return (
