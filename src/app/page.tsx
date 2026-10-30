@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { LedgerRow } from '@/components/LedgerRow';
 import { formatDate, formatMinutes, pad2 } from '@/lib/format';
 import { listCourses, listTutorials, siteStats } from '@/lib/queries';
+import { CATEGORIES, TRACKS } from '@/lib/taxonomy';
 
 export default function HomePage() {
   const courses = listCourses({ kind: 'course' });
@@ -10,6 +11,11 @@ export default function HomePage() {
   const labs = listCourses({ kind: 'lab' });
   const tutorials = listTutorials().slice(0, 4);
   const stats = siteStats();
+  const tracks = TRACKS.map((track) => ({
+    ...track,
+    courses: courses.filter((course) => course.tracks.includes(track.slug)).length,
+    tutorials: listTutorials({ track: track.slug }).length,
+  }));
 
   return (
     <>
@@ -68,6 +74,39 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      <section className="section" id="tracks">
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <h2>מה התפקיד שלך?</h2>
+              <p>אותו קטלוג, מסודר לפי מה שאתם עושים ביום־יום. בחרו מסלול ותראו רק את מה שרלוונטי.</p>
+            </div>
+            <Link href="/courses" className="more">
+              כל הקטלוג
+            </Link>
+          </div>
+          <div className="track-grid">
+            {tracks.map((track) => (
+              <Link className="track-card" key={track.slug} href={`/tracks/${track.slug}`}>
+                <h3>{track.label}</h3>
+                <p>{track.blurb}</p>
+                <span className="stat">
+                  {track.courses} קורסים · {track.tutorials} מדריכים
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="chips" style={{ marginTop: 18 }}>
+            <span className="chips-label">לפי נושא:</span>
+            {CATEGORIES.map((category) => (
+              <Link key={category.slug} href={`/categories/${category.slug}`}>
+                {category.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="section">
         <div className="wrap">

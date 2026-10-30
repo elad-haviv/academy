@@ -1,5 +1,8 @@
 import 'server-only';
 import { db } from './db';
+import { splitTracks } from './taxonomy';
+
+export type ContentAccess = 'free' | 'premium';
 
 export type CourseSummary = {
   slug: string;
@@ -15,6 +18,9 @@ export type CourseSummary = {
   featured: boolean;
   lessonCount: number;
   minutes: number;
+  category: string;
+  tracks: string[];
+  access: ContentAccess;
 };
 
 export type LessonRef = {
@@ -23,11 +29,22 @@ export type LessonRef = {
   minutes: number;
   moduleIdx: number;
   idx: number;
+  access: ContentAccess;
+  isPreview: boolean;
 };
 
 export type CourseDetail = CourseSummary & {
-  modules: { idx: number; title: string; summary: string; lessons: { slug: string; title: string; minutes: number }[] }[];
+  modules: {
+    idx: number;
+    title: string;
+    summary: string;
+    lessons: { slug: string; title: string; minutes: number; access: ContentAccess; isPreview: boolean }[];
+  }[];
 };
+
+function toAccess(value: unknown, fallback: ContentAccess): ContentAccess {
+  return value === 'premium' || value === 'free' ? value : fallback;
+}
 
 function toSummary(row: any): CourseSummary {
   return {
@@ -44,18 +61,46 @@ function toSummary(row: any): CourseSummary {
     featured: Boolean(row.featured),
     lessonCount: row.lesson_count,
     minutes: row.minutes,
+    category: (row.category ?? '') as string,
+    tracks: splitTracks(String(row.tracks ?? '')),
+    access: toAccess(row.access, 'free'),
   };
 }
 
-export function listCourses(options: { kind?: string; level?: string; tag?: string; q?: string; sort?: string } = {}): CourseSummary[] {
+export type CourseFilters = {
+  kind?: string;
+  level?: string;
+  tag?: string;
+  q?: string;
+  sort?: string;
+  category?: string;
+  track?: string;
+  access?: string;
+};
+
+export function listCourses(options: CourseFilters = {}): CourseSummary[] {
   const where: string[] = [];
   const params: any[] = [];
   const kind = options.kind ?? 'course';
   where.push('kind = ?');
   params.push(kind);
+  // Drafts and items in review are never listed publicly (spec §6.2).
+  where.push("status NOT IN ('draft', 'review')");
   if (options.level) {
     where.push('level = ?');
     params.push(options.level);
+  }
+  if (options.category) {
+    where.push('category = ?');
+    params.push(options.category);
+  }
+  if (options.track) {
+    where.push("(',' || replace(tracks, ', ', ',') || ',') LIKE ?");
+    params.push(`%,${options.track},%`);
+  }
+  if (options.access) {
+    where.push('access = ?');
+    params.push(options.access);
   }
   if (options.tag) {
     where.push("(',' || replace(tags, ', ', ',') || ',') LIKE ?");
@@ -67,7 +112,15 @@ export function listCourses(options: { kind?: string; level?: string; tag?: stri
     params.push(like, like, like, like);
   }
   const order =
-    options.sort === 'short' ? 'minutes ASC' : options.sort === 'long' ? 'minutes DESC' : options.sort === 'title' ? 'title ASC' : 'sort ASC, title ASC';
+    options.sort === 'short'
+      ? 'minutes ASC'
+      : options.sort === 'long'
+        ? 'minutes DESC'
+        : options.sort === 'title'
+          ? 'title ASC'
+          : options.sort === 'level'
+            ? "CASE level WHEN 'Beginner' THEN 1 WHEN 'Intermediate' THEN 2 ELSE 3 END ASC, sort ASC"
+            : 'sort ASC, title ASC';
   const rows = db()
     .prepare(`SELECT * FROM courses WHERE ${where.join(' AND ')} ORDER BY ${order}`)
     .all(...params);
@@ -76,43 +129,74 @@ export function listCourses(options: { kind?: string; level?: string; tag?: stri
 
 export function getCourse(slug: string): CourseDetail | null {
   const row = db().prepare('SELECT * FROM courses WHERE slug = ?').get(slug) as any;
-  if (!row) return null;
+  if (!row || row.status === 'draft' || row.status === 'review') return null;
+  const summary = toSummary(row);
   const moduleRows = db()
     .prepare('SELECT idx, title, summary FROM course_modules WHERE course_slug = ? ORDER BY idx')
     .all(slug) as any[];
   const lessonRows = db()
-    .prepare('SELECT slug, title, minutes, module_idx, idx FROM lessons WHERE course_slug = ? ORDER BY idx')
+    .prepare('SELECT slug, title, minutes, module_idx, idx, access, is_preview FROM lessons WHERE course_slug = ? ORDER BY idx')
     .all(slug) as any[];
   return {
-    ...toSummary(row),
+    ...summary,
     modules: moduleRows.map((m) => ({
       idx: m.idx,
       title: m.title,
       summary: m.summary,
       lessons: lessonRows
         .filter((l) => l.module_idx === m.idx)
-        .map((l) => ({ slug: l.slug, title: l.title, minutes: l.minutes })),
+        .map((l) => ({
+          slug: l.slug,
+          title: l.title,
+          minutes: l.minutes,
+          access: toAccess(l.access, summary.access),
+          isPreview: Boolean(l.is_preview),
+        })),
     })),
   };
 }
 
 export function lessonRefs(courseSlug: string): LessonRef[] {
-  return (db()
-    .prepare('SELECT slug, title, minutes, module_idx, idx FROM lessons WHERE course_slug = ? ORDER BY idx')
-    .all(courseSlug) as any[]).map((row) => ({
+  const rows = db()
+    .prepare(
+      `SELECT l.slug, l.title, l.minutes, l.module_idx, l.idx, l.access, l.is_preview, c.access AS course_access
+       FROM lessons l JOIN courses c ON c.slug = l.course_slug
+       WHERE l.course_slug = ? ORDER BY l.idx`
+    )
+    .all(courseSlug) as any[];
+  return rows.map((row) => ({
     slug: row.slug,
     title: row.title,
     minutes: row.minutes,
     moduleIdx: row.module_idx,
     idx: row.idx,
+    access: toAccess(row.access || row.course_access, 'free'),
+    isPreview: Boolean(row.is_preview),
   }));
 }
 
-export function getLesson(courseSlug: string, lessonSlug: string) {
+export type LessonDetail = {
+  slug: string;
+  title: string;
+  minutes: number;
+  body: string;
+  moduleIdx: number;
+  moduleTitle: string;
+  moduleSummary: string;
+  idx: number;
+  access: ContentAccess;
+  isPreview: boolean;
+  videoUrl: string | null;
+};
+
+export function getLesson(courseSlug: string, lessonSlug: string): LessonDetail | null {
   const row = db()
     .prepare(
-      `SELECT l.slug, l.title, l.minutes, l.body, l.module_idx, l.idx, m.title AS module_title, m.summary AS module_summary
-       FROM lessons l LEFT JOIN course_modules m ON m.course_slug = l.course_slug AND m.idx = l.module_idx
+      `SELECT l.slug, l.title, l.minutes, l.body, l.module_idx, l.idx, l.access, l.is_preview, l.video_url,
+              m.title AS module_title, m.summary AS module_summary, c.access AS course_access
+       FROM lessons l
+       LEFT JOIN course_modules m ON m.course_slug = l.course_slug AND m.idx = l.module_idx
+       JOIN courses c ON c.slug = l.course_slug
        WHERE l.course_slug = ? AND l.slug = ?`
     )
     .get(courseSlug, lessonSlug) as any;
@@ -126,6 +210,9 @@ export function getLesson(courseSlug: string, lessonSlug: string) {
     moduleTitle: (row.module_title ?? '') as string,
     moduleSummary: (row.module_summary ?? '') as string,
     idx: row.idx as number,
+    access: toAccess(row.access || row.course_access, 'free'),
+    isPreview: Boolean(row.is_preview),
+    videoUrl: (row.video_url ?? null) as string | null,
   };
 }
 
@@ -204,14 +291,35 @@ export type TutorialSummary = {
   level: string;
   minutes: number;
   published: string;
+  category: string;
+  tracks: string[];
+  access: ContentAccess;
 };
 
-export function listTutorials(options: { tag?: string; q?: string } = {}): TutorialSummary[] {
+export type TutorialFilters = { tag?: string; q?: string; level?: string; category?: string; track?: string; access?: string };
+
+export function listTutorials(options: TutorialFilters = {}): TutorialSummary[] {
   const where: string[] = [];
   const params: any[] = [];
   if (options.tag) {
     where.push("(',' || replace(tags, ', ', ',') || ',') LIKE ?");
     params.push(`%,${options.tag},%`);
+  }
+  if (options.level) {
+    where.push('level = ?');
+    params.push(options.level);
+  }
+  if (options.category) {
+    where.push('category = ?');
+    params.push(options.category);
+  }
+  if (options.track) {
+    where.push("(',' || replace(tracks, ', ', ',') || ',') LIKE ?");
+    params.push(`%,${options.track},%`);
+  }
+  if (options.access) {
+    where.push('access = ?');
+    params.push(options.access);
   }
   if (options.q) {
     where.push('(lower(title) LIKE ? OR lower(excerpt) LIKE ? OR lower(tags) LIKE ?)');
@@ -220,7 +328,7 @@ export function listTutorials(options: { tag?: string; q?: string } = {}): Tutor
   }
   const rows = db()
     .prepare(
-      `SELECT slug, title, excerpt, tags, level, minutes, published FROM tutorials
+      `SELECT slug, title, excerpt, tags, level, minutes, published, category, tracks, access FROM tutorials
        ${where.length ? 'WHERE ' + where.join(' AND ') : ''}
        ORDER BY published DESC, title ASC`
     )
@@ -233,6 +341,9 @@ export function listTutorials(options: { tag?: string; q?: string } = {}): Tutor
     level: row.level,
     minutes: row.minutes,
     published: row.published,
+    category: (row.category ?? '') as string,
+    tracks: splitTracks(String(row.tracks ?? '')),
+    access: toAccess(row.access, 'free'),
   }));
 }
 
@@ -247,6 +358,9 @@ export function getTutorial(slug: string) {
     level: row.level,
     minutes: row.minutes,
     published: row.published,
+    category: (row.category ?? '') as string,
+    tracks: splitTracks(String(row.tracks ?? '')),
+    access: toAccess(row.access, 'free'),
     body: row.body as string,
   };
 }

@@ -1,34 +1,28 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { CourseFilterBar } from '@/components/CourseFilterBar';
 import { LedgerRow } from '@/components/LedgerRow';
 import { allTags, listCourses } from '@/lib/queries';
+import { CATEGORIES, TRACKS } from '@/lib/taxonomy';
 
-export const metadata: Metadata = { title: 'קורסים' };
-
-const LEVELS = [
-  { value: '', label: 'כל הרמות' },
-  { value: 'Beginner', label: 'מתחילים' },
-  { value: 'Intermediate', label: 'בינוני' },
-  { value: 'Advanced', label: 'מתקדם' },
-];
-
-const SORTS = [
-  { value: '', label: 'סדר לימוד' },
-  { value: 'short', label: 'הקצרים קודם' },
-  { value: 'long', label: 'הארוכים קודם' },
-  { value: 'title', label: 'לפי שם' },
-];
+export const metadata: Metadata = {
+  title: 'קורסים',
+  alternates: { canonical: '/courses' },
+};
 
 export default function CoursesPage({
   searchParams,
 }: {
-  searchParams: { q?: string; level?: string; tag?: string; sort?: string };
+  searchParams: { q?: string; level?: string; tag?: string; sort?: string; category?: string; track?: string; access?: string };
 }) {
   const q = searchParams.q ?? '';
   const level = searchParams.level ?? '';
   const tag = searchParams.tag ?? '';
   const sort = searchParams.sort ?? '';
-  const courses = listCourses({ kind: 'course', q, level, tag, sort });
+  const category = searchParams.category ?? '';
+  const track = searchParams.track ?? '';
+  const access = searchParams.access ?? '';
+  const courses = listCourses({ kind: 'course', q, level, tag, sort, category, track, access });
   const tags = allTags();
 
   return (
@@ -43,40 +37,33 @@ export default function CoursesPage({
       </div>
 
       <div className="wrap" style={{ paddingBottom: 72 }}>
-        <form className="filters" method="get" role="search">
-          <label className="sr-only" htmlFor="q">
-            חיפוש קורס
-          </label>
-          <input id="q" type="search" name="q" defaultValue={q} placeholder="חיפוש: docker, typescript, חשמל…" />
-          <label className="sr-only" htmlFor="level">
-            רמה
-          </label>
-          <select id="level" name="level" defaultValue={level}>
-            {LEVELS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <label className="sr-only" htmlFor="sort">
-            מיון
-          </label>
-          <select id="sort" name="sort" defaultValue={sort}>
-            {SORTS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          {tag ? <input type="hidden" name="tag" value={tag} /> : null}
-          <button type="submit" className="btn small">
-            סינון
-          </button>
-          <span className="count">{courses.length} קורסים</span>
-        </form>
+        <div className="chips" style={{ marginTop: 22 }}>
+          <Link href="/courses" data-active={category ? 'false' : 'true'}>
+            כל הנושאים
+          </Link>
+          {CATEGORIES.map((item) => (
+            <Link
+              key={item.slug}
+              href={`/categories/${item.slug}`}
+              data-active={category === item.slug ? 'true' : 'false'}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+        <div className="chips" style={{ marginTop: 0 }}>
+          <span className="chips-label">מסלולים:</span>
+          {TRACKS.map((item) => (
+            <Link key={item.slug} href={`/tracks/${item.slug}`} data-active={track === item.slug ? 'true' : 'false'}>
+              {item.label}
+            </Link>
+          ))}
+        </div>
+
+        <CourseFilterBar action="/courses" values={{ q, level, category, track, access, sort, tag }} count={courses.length} />
 
         <div className="chips">
-          <Link href="/courses" data-active={tag ? 'false' : 'true'}>
+          <Link href={category ? `/courses?category=${category}` : '/courses'} data-active={tag ? 'false' : 'true'}>
             הכל
           </Link>
           {tags.map((topic) => (

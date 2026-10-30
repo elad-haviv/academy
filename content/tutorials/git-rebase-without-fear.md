@@ -5,6 +5,9 @@ tags: Git
 level: Beginner
 minutes: 7
 published: 2026-10-21
+category: software
+tracks: developer
+access: free
 ---
 
 Rebase מפחיד כי כותבים עליו "משכתב היסטוריה". זה נכון, אבל זה גם בדיוק מה שהוא עושה — ומרגע שמבינים את זה, הוא כלי פשוט.

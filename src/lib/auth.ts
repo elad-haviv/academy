@@ -12,6 +12,7 @@ export type SessionUser = {
   email: string;
   name: string;
   role: string;
+  emailVerifiedAt: string | null;
 };
 
 export function hashPassword(password: string): string {
@@ -55,19 +56,26 @@ export function currentUser(): SessionUser | null {
   if (!token) return null;
   const row = db()
     .prepare(
-      `SELECT u.id AS id, u.email AS email, u.name AS name, u.role AS role, s.expires_at AS expires_at
+      `SELECT u.id AS id, u.email AS email, u.name AS name, u.role AS role, u.email_verified_at AS email_verified_at,
+              s.expires_at AS expires_at
        FROM sessions s JOIN users u ON u.id = s.user_id
        WHERE s.token = ?`
     )
     .get(token) as
-    | { id: number; email: string; name: string; role: string; expires_at: string }
+    | { id: number; email: string; name: string; role: string; email_verified_at: string | null; expires_at: string }
     | undefined;
   if (!row) return null;
   if (new Date(row.expires_at).getTime() < Date.now()) {
     db().prepare('DELETE FROM sessions WHERE token = ?').run(token);
     return null;
   }
-  return { id: row.id, email: row.email, name: row.name, role: row.role };
+  return {
+    id: row.id,
+    email: row.email,
+    name: row.name,
+    role: row.role,
+    emailVerifiedAt: row.email_verified_at ?? null,
+  };
 }
 
 export function requireUser(next: string): SessionUser {

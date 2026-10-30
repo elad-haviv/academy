@@ -4,6 +4,12 @@
   "description": "מעבדה שנבנית עכשיו: חוקר גנרטור תלת־ממדי עם 19 רכיבים, חדר מכונות עם תרחישי מפגעים, מרכז בטיחות חשמל עם 16 נושאים, סימולטור מערכת הספק ו-ATS, אבחון תקלות מול לוח בקרה, מחשבונים הנדסיים והערכה עם תעודה חינוכית.\n\nהמודולים קיימים כמערכת עצמאית ומועברים לאקדמיה עם התאמת התקדמות אחודה בין הקורסים והמעבדות.",
   "level": "Intermediate",
   "language": "he",
+  "category": "automation",
+  "tracks": [
+    "electrician",
+    "engineer",
+    "student"
+  ],
   "tags": [
     "גנרטורים",
     "חשמל",
@@ -13,6 +19,7 @@
   "kind": "lab",
   "externalUrl": null,
   "status": "in-development",
+  "access": "premium",
   "featured": false,
   "sort": 11,
   "modules": []

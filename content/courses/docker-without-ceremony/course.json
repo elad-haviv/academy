@@ -4,6 +4,11 @@
   "description": "רוב האנשים לומדים Docker מהדבקה של פקודות ומתוסכלים כשה-build נכשל. הקורס הזה עובד מהכיוון השני: קודם מבינים מה זה דימוי, שכבה ומכולה, ואחר כך כותבים Dockerfile שמתאים לפרויקט אמיתי.\n\nבסוף הקורס יהיה לכם Dockerfile קטן, מהיר ובטוח, ואפליקציה שעולה עם `docker compose up` בפקודה אחת — גם במחשב של עמית וגם בשרת.",
   "level": "Beginner",
   "language": "he",
+  "category": "devops",
+  "tracks": [
+    "developer",
+    "engineer"
+  ],
   "tags": [
     "Docker",
     "DevOps",
@@ -12,6 +17,7 @@
   "kind": "course",
   "externalUrl": null,
   "status": "published",
+  "access": "premium",
   "featured": true,
   "sort": 1,
   "modules": [
@@ -23,7 +29,8 @@
           "slug": "image-vs-container",
           "title": "דימוי ומכולה: מה באמת קורה",
           "minutes": 9,
-          "file": "01-image-vs-container.md"
+          "file": "01-image-vs-container.md",
+          "is_preview": true
         },
         {
           "slug": "first-dockerfile",
