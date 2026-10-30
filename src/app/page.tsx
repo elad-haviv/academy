@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { LedgerRow } from '@/components/LedgerRow';
-import { formatDate, formatMinutes, pad2 } from '@/lib/format';
+import { countLabel, formatDate, formatMinutes, pad2 } from '@/lib/format';
 import { listCourses, listTutorials, siteStats } from '@/lib/queries';
 import { CATEGORIES, TRACKS } from '@/lib/taxonomy';
 
@@ -93,7 +93,7 @@ export default function HomePage() {
                 <h3>{track.label}</h3>
                 <p>{track.blurb}</p>
                 <span className="stat">
-                  {track.courses} קורסים{track.labs ? ` · ${track.labs} מעבדות` : ''}{track.tutorials ? ` · ${track.tutorials} מדריכים` : ''}
+                  {countLabel(track.courses, 'קורס', 'קורסים')}{track.labs ? ` · ${countLabel(track.labs, 'מעבדה', 'מעבדות')}` : ''}{track.tutorials ? ` · ${countLabel(track.tutorials, 'מדריך', 'מדריכים')}` : ''}
                 </span>
               </Link>
             ))}

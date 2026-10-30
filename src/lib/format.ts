@@ -16,3 +16,9 @@ export function formatDate(value: string): string {
 export function pad2(value: number): string {
   return String(value).padStart(2, '0');
 }
+
+/** Hebrew counting: 1 takes the singular, 0 and 2+ take the plural. */
+export function countLabel(n: number, singular: string, plural: string): string {
+  if (n === 1) return `1 ${singular}`;
+  return `${n} ${plural}`;
+}
