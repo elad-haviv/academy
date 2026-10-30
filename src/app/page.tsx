@@ -147,7 +147,7 @@ export default function HomePage() {
                 <h3>{lab.title}</h3>
                 <p>{lab.subtitle}</p>
                 <div className="card-foot">
-                  <span className="stat">{lab.status === 'in-development' ? 'בבנייה' : 'פתוח ללימוד'}</span>
+                  <span className="stat">{lab.status === 'in-development' ? 'בבנייה' : 'פתוחה ללימוד'}</span>
                   <Link href={`/labs/${lab.slug}`} className="btn ghost small">
                     {lab.status === 'in-development' ? 'מה בתכנון' : 'להיכנס למעבדה'}
                   </Link>
@@ -207,7 +207,7 @@ export default function HomePage() {
             <div style={{ flex: '1 1 320px' }}>
               <h3 style={{ marginBottom: 6 }}>פותחים חשבון כדי לשמור התקדמות</h3>
               <p style={{ margin: 0, color: 'var(--ink-soft)', fontSize: '0.94rem' }}>
-                הקורסים פתוחים לכולם. חשבון חינמי שומר איפה עצרת, אילו שיעורים סימנת ואילו קורסים התחלת — בכל מכשיר.
+                כל התוכן פתוח עכשיו, בלי תשלום ובלי חשבון. חשבון חינמי רק שומר איפה עצרת ואילו שיעורים סימנת — בכל מכשיר.
               </p>
             </div>
             <Link href="/register" className="btn">

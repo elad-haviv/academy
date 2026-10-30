@@ -6,7 +6,7 @@ import { PLANS, REFUND_DAYS, TRIAL_DAYS } from '@/lib/pricing';
 
 export const metadata: Metadata = {
   title: 'מנוי',
-  description: 'מנוי אחד לכל האקדמיה: כל הקורסים, המעבדות וחומרי העבודה. ₪349 לשנה או ₪39 לחודש, 7 ימים ניסיון בלי כרטיס אשראי.',
+  description: 'מנוי אחד לכל האקדמיה: כל הקורסים, המעבדות וחומרי העבודה. בינתיים כל התוכן פתוח בחינם; המנוי ייפתח בהמשך.',
   alternates: { canonical: '/pricing' },
 };
 
@@ -61,8 +61,8 @@ export default function PricingPage({ searchParams }: { searchParams: { waitlist
         </div>
 
         <div className="notice" style={{ marginTop: 26 }}>
-          <strong>{TRIAL_DAYS} ימים ניסיון, בלי כרטיס אשראי.</strong> מתחילים לימוד, ובתום השבוע מחליטים. ביטול בכל עת,
-          והגישה נשארת עד סוף התקופה ששולמה. אם המנוי לא מתאים — החזר כספי מלא בתוך {REFUND_DAYS} יום, בלי שאלות.
+          <strong>המנוי טרם נפתח לחיוב — כל התוכן פתוח עכשיו בחינם.</strong> המחירים כאן הם התוכנית: כשנפתח,
+          יהיו {TRIAL_DAYS} ימים ניסיון בלי כרטיס אשראי, ביטול בכל עת והחזר מלא בתוך {REFUND_DAYS} יום.
         </div>
 
         <section className="section" id="compare" style={{ paddingInline: 0 }}>

@@ -25,7 +25,7 @@ export function SiteFooter() {
           <div>
             <h4>החשבון שלי</h4>
             <Link href="/dashboard">הלימודים שלי</Link>
-            <Link href="/pricing">מנוי וחינם</Link>
+            <Link href="/pricing">מנוי ומחירים</Link>
             <Link href="/login">התחברות</Link>
           </div>
           <div>

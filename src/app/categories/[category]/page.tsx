@@ -87,7 +87,7 @@ export default function CategoryPage({
                   <h3>{lab.title}</h3>
                   <p>{lab.subtitle}</p>
                   <div className="card-foot">
-                    <span className="stat">{lab.status === 'in-development' ? 'בבנייה' : 'פתוח'}</span>
+                    <span className="stat">{lab.status === 'in-development' ? 'בבנייה' : 'פתוחה'}</span>
                     <Link href={`/labs/${lab.slug}`} className="btn ghost small">
                       לפרטים
                     </Link>

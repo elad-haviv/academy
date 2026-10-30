@@ -48,6 +48,18 @@ export default function LessonPage({ params }: { params: { slug: string; lessonS
           {refs.length} שיעורים · {formatMinutes(course.minutes)}
         </div>
         {progress ? <Progress percent={progress.percent} completed={progress.completed} total={progress.total} /> : null}
+        {/* On phones the rail collapses into one disclosure row; on desktop the toggle is hidden
+            and the list is always open (see .syl rules in globals.css). Checkbox, not <details>:
+            a closed <details> body cannot be revealed by author CSS. */}
+        <div className="syl">
+          <input type="checkbox" id="syl-toggle" className="syl-input" aria-label="פתיחת תוכן הקורס" />
+          <label htmlFor="syl-toggle" className="syl-toggle">
+            <span>תוכן הקורס</span>
+            <span className="syl-count">
+              {done.size}/{refs.length}
+            </span>
+          </label>
+          <div className="syl-body">
         {course.modules.map((module) => (
           <div key={module.idx}>
             <div className="module-label">
@@ -60,9 +72,10 @@ export default function LessonPage({ params }: { params: { slug: string; lessonS
                     href={`/learn/${course.slug}/${item.slug}`}
                     data-current={item.slug === lesson.slug ? 'true' : 'false'}
                   >
-                    <span className={done.has(item.slug) ? 'tick' : 'tick empty'} aria-hidden="true">
-                      {done.has(item.slug) ? '✓' : '·'}
-                    </span>
+                    <span
+                      className={done.has(item.slug) ? 'tick' : 'tick pending'}
+                      aria-hidden="true"
+                    />
                     <span>{item.title}</span>
                     {showLocks && isPremiumLesson(item) ? (
                       <span className="lock" aria-label="שיעור למנויים">
@@ -75,6 +88,8 @@ export default function LessonPage({ params }: { params: { slug: string; lessonS
             </ul>
           </div>
         ))}
+          </div>
+        </div>
       </aside>
 
       <div className="learn-main">

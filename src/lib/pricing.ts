@@ -23,7 +23,7 @@ export const PLANS: Plan[] = [
     amountAgorot: ANNUAL_AGOROT,
     price: '₪349',
     period: 'לשנה',
-    pitch: 'המסלול המומלץ. יוצא ₪29 לחודש — חודשיים מתנה.',
+    pitch: 'המסלול המומלץ. יוצא ₪29 לחודש — שלושה חודשים מתנה.',
     featured: true,
   },
   {

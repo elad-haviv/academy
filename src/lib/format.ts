@@ -3,7 +3,8 @@ export function formatMinutes(minutes: number): string {
   if (minutes < 60) return `${minutes} דק׳`;
   const hours = Math.floor(minutes / 60);
   const rest = minutes % 60;
-  return rest ? `${hours} ש׳ ${rest} דק׳` : `${hours} ש׳`;
+  const hourWord = hours === 1 ? 'שעה' : 'שעות';
+  return rest ? `${hours} ${hourWord} ${rest} דק׳` : `${hours} ${hourWord}`;
 }
 
 export function formatDate(value: string): string {

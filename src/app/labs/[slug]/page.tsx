@@ -29,10 +29,10 @@ export default function LabPage({ params }: { params: { slug: string } }) {
       <div className="lab-bay">
         <div className="lab-bay-head">
           <span className="dot" aria-hidden="true" />
-          <span>haviv-academy / lab / {params.slug}</span>
+          <span>מעבדה · {lab.title}</span>
           <span className="spacer" />
           <a href={lab.externalUrl} target="_blank" rel="noreferrer">
-            open full screen
+            מסך מלא
           </a>
         </div>
         <div className="lab-bay-body">
