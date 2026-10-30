@@ -4,6 +4,10 @@
   "description": "TypeScript לא נועד להיות שפה חדשה שתלמדו מאפס — הוא כלי שמטרתו לתפוס טעויות לפני שהן מגיעות למשתמש. בקורס הזה נתמקד במה שמשנה קוד אמיתי: צמצום טיפוסים, מודלים לדומיין, generics שמפחיתים שכפול, ומקומות שבהם TypeScript לא מגן עליכם בכלל.\n\nהקורס מניח שאתם יודעים JavaScript ומריצים פרויקט עם `tsc` או bundler. אין בו הסברים על `let` ו-`const`.",
   "level": "Intermediate",
   "language": "he",
+  "category": "software",
+  "tracks": [
+    "developer"
+  ],
   "tags": [
     "TypeScript",
     "JavaScript",
@@ -12,6 +16,7 @@
   "kind": "course",
   "externalUrl": null,
   "status": "published",
+  "access": "premium",
   "featured": true,
   "sort": 2,
   "modules": [
@@ -23,7 +28,8 @@
           "slug": "what-ts-buys",
           "title": "מה TypeScript נותן לכם בפועל",
           "minutes": 8,
-          "file": "01-what-ts-buys.md"
+          "file": "01-what-ts-buys.md",
+          "is_preview": true
         },
         {
           "slug": "narrowing",

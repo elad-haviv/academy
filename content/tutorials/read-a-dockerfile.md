@@ -5,6 +5,9 @@ tags: Docker, DevOps
 level: Beginner
 minutes: 6
 published: 2026-10-26
+category: devops
+tracks: developer, engineer
+access: free
 ---
 
 Dockerfile נקרא מלמעלה למטה, וכל הוראה היא שכבה במערכת הקבצים. זה כל מה שצריך כדי להבין אחד.

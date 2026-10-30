@@ -3,14 +3,23 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { enrollAction, reviewAction } from '@/app/actions';
 import { Progress } from '@/components/Progress';
-import { currentUser } from '@/lib/auth';
+import { isPremiumLesson, paywallEnabled, resolveViewer } from '@/lib/access';
 import { formatMinutes } from '@/lib/format';
 import { courseProgress, getCourse, isEnrolled, reviewsFor } from '@/lib/queries';
 import { renderMarkdown } from '@/lib/markdown';
+import { categoryLabel, trackLabel } from '@/lib/taxonomy';
+
+const SITE = 'https://academy.haviv.pro';
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const course = getCourse(params.slug);
-  return { title: course ? course.title : 'קורס' };
+  if (!course) return { title: 'קורס' };
+  return {
+    title: course.title,
+    description: course.subtitle || course.description.slice(0, 160),
+    alternates: { canonical: `/courses/${course.slug}` },
+    openGraph: { title: course.title, description: course.subtitle, url: `${SITE}/courses/${course.slug}`, type: 'article' },
+  };
 }
 
 const LEVEL_HE: Record<string, string> = {
@@ -23,7 +32,9 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
   const course = getCourse(params.slug);
   if (!course || course.kind !== 'course') notFound();
 
-  const user = currentUser();
+  const viewer = resolveViewer();
+  const user = viewer.user;
+  const showLocks = paywallEnabled() && !viewer.isMember;
   const enrolled = user ? isEnrolled(user.id, course.slug) : false;
   const progress = user ? courseProgress(user.id, course.slug) : null;
   const { reviews, average } = reviewsFor(course.slug);
@@ -34,6 +45,9 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
       <div className="course-head">
         <div className="wrap">
           <div className="kicker">
+            {course.category ? (
+              <Link href={`/categories/${course.category}`}>{categoryLabel(course.category)}</Link>
+            ) : null}
             <span>{course.level ? LEVEL_HE[course.level] : 'קורס'}</span>
             <span>{course.lessonCount} שיעורים</span>
             <span>{formatMinutes(course.minutes)}</span>
@@ -63,6 +77,12 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
                       <Link href={`/learn/${course.slug}/${lesson.slug}`}>
                         <span className="no">{lessonIndex + 1}.</span>
                         <span>{lesson.title}</span>
+                        {lesson.isPreview ? <span className="tag free">חינם</span> : null}
+                        {showLocks && isPremiumLesson(lesson) ? (
+                          <span className="lock" aria-label="שיעור למנויים">
+                            🔒
+                          </span>
+                        ) : null}
                         <span className="min">{lesson.minutes} דק׳</span>
                       </Link>
                     </li>
@@ -135,7 +155,32 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
             <dt>שפה</dt>
             <dd>עברית</dd>
             <dt>גישה</dt>
-            <dd>חופשית</dd>
+            <dd>{course.access === 'premium' ? 'במנוי · שיעור ראשון חינם' : 'חופשית'}</dd>
+            {course.category ? (
+              <>
+                <dt>נושא</dt>
+                <dd>
+                  <Link href={`/categories/${course.category}`} style={{ color: 'var(--blueprint)' }}>
+                    {categoryLabel(course.category)}
+                  </Link>
+                </dd>
+              </>
+            ) : null}
+            {course.tracks.length ? (
+              <>
+                <dt>מסלול</dt>
+                <dd>
+                  {course.tracks.map((track, index) => (
+                    <span key={track}>
+                      {index ? ' · ' : ''}
+                      <Link href={`/tracks/${track}`} style={{ color: 'var(--blueprint)' }}>
+                        {trackLabel(track)}
+                      </Link>
+                    </span>
+                  ))}
+                </dd>
+              </>
+            ) : null}
           </dl>
 
           {user && progress ? (

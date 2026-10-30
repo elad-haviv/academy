@@ -5,6 +5,9 @@ tags: תיעוד, Git
 level: Beginner
 minutes: 5
 published: 2026-09-30
+category: career
+tracks: developer, student
+access: free
 ---
 
 README הוא לא תיעוד. הוא המבחן הראשון של הפרויקט: אם מישהו לא מצליח להריץ אותו בדקה, הוא עובר לפרויקט הבא.

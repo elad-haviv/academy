@@ -5,6 +5,9 @@ tags: SSH, DevOps, אבטחה
 level: Beginner
 minutes: 5
 published: 2026-10-14
+category: devops
+tracks: developer, engineer
+access: free
 ---
 
 ## יצירת מפתח

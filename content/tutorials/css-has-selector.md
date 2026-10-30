@@ -5,6 +5,9 @@ tags: CSS, Frontend
 level: Intermediate
 minutes: 6
 published: 2026-10-08
+category: software
+tracks: developer
+access: free
 ---
 
 `:has()` מאפשר לשאול "האם יש לי צאצא שעונה לתנאי?" — כלומר לבחור **הורה** לפי תוכן. זה פתח דלת לכל מיני דפוסים שהיו דורשים JavaScript.

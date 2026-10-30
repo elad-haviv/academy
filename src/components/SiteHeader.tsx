@@ -14,6 +14,7 @@ export function SiteHeader({ user }: { user: { name: string } | null }) {
           <Link href="/labs">מעבדות</Link>
           <Link href="/tutorials">מדריכים</Link>
           <Link href="/videos">וידאו</Link>
+          <Link href="/pricing">מנוי</Link>
           <Link href="/about">אודות</Link>
           {user ? (
             <>

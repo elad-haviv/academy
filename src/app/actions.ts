@@ -4,6 +4,14 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { db } from '@/lib/db';
 import { createSession, currentUser, destroySession, hashPassword, verifyPassword } from '@/lib/auth';
+import { canTrackLesson, resolveViewer } from '@/lib/access';
+import { getLesson } from '@/lib/queries';
+
+function audit(action: string, subject: string, detail = '', actorUserId: number | null = null) {
+  db()
+    .prepare('INSERT INTO audit_log (actor_user_id, action, subject, detail, created_at) VALUES (?, ?, ?, ?, ?)')
+    .run(actorUserId, action, subject, detail, new Date().toISOString());
+}
 
 function safeNext(value: FormDataEntryValue | null): string {
   const next = typeof value === 'string' ? value : '';
@@ -37,7 +45,8 @@ export async function loginAction(formData: FormData) {
   const next = safeNext(formData.get('next'));
 
   const user = db().prepare('SELECT id, password_hash FROM users WHERE email = ?').get(email) as any;
-  if (!user || !verifyPassword(password, user.password_hash)) {
+  // password_hash IS NULL/'' means a Google-only account: always the generic error.
+  if (!user || !user.password_hash || !verifyPassword(password, user.password_hash)) {
     redirect(`/login?error=1&next=${encodeURIComponent(next)}`);
   }
   createSession(user.id);
@@ -68,6 +77,11 @@ export async function completeLessonAction(formData: FormData) {
   const lessonSlug = String(formData.get('lesson') ?? '');
   const next = safeNext(formData.get('next'));
   if (!user) redirect(`/login?next=${encodeURIComponent(next)}`);
+
+  // Progress can only be tracked on content this viewer may read fully (spec §3.2).
+  const lesson = getLesson(courseSlug, lessonSlug);
+  if (!lesson) redirect(`/learn/${courseSlug}`);
+  if (!canTrackLesson(resolveViewer(), lesson)) redirect(`/learn/${courseSlug}/${lessonSlug}`);
 
   const already = db()
     .prepare('SELECT 1 AS ok FROM completions WHERE user_id = ? AND course_slug = ? AND lesson_slug = ?')
@@ -108,4 +122,31 @@ export async function reviewAction(formData: FormData) {
   }
   revalidatePath(`/courses/${courseSlug}`);
   redirect(`/courses/${courseSlug}#reviews`);
+}
+
+/**
+ * Waitlist for the subscription while payments are not wired up (spec §5.2).
+ * One row per email; a signed-in visitor gets their user_id attached.
+ */
+export async function waitlistAction(formData: FormData) {
+  const email = String(formData.get('email') ?? '').trim().toLowerCase();
+  const name = String(formData.get('name') ?? '').trim().slice(0, 80);
+  const note = String(formData.get('note') ?? '').trim().slice(0, 500);
+
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) redirect('/pricing?waitlist=invalid#waitlist');
+
+  const viewer = resolveViewer();
+  const existing = db().prepare('SELECT id FROM waitlist WHERE email = ?').get(email) as { id: number } | undefined;
+  if (existing) redirect('/pricing?waitlist=exists#waitlist');
+
+  db()
+    .prepare(
+      `INSERT INTO waitlist (email, name, note, user_id, source, created_at) VALUES (?, ?, ?, ?, 'pricing', ?)
+       ON CONFLICT(email) DO NOTHING`
+    )
+    .run(email, name || viewer.user?.name || '', note, viewer.user?.id ?? null, new Date().toISOString());
+  audit('waitlist.join', email, note, viewer.user?.id ?? null);
+
+  revalidatePath('/pricing');
+  redirect('/pricing?waitlist=ok#waitlist');
 }
