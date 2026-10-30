@@ -17,6 +17,23 @@ export const metadata: Metadata = {
     description: 'קורסים, מדריכים ומעבדות אינטראקטיביות בעברית.',
     type: 'website',
     locale: 'he_IL',
+    siteName: 'Haviv Academy',
+    images: [{ url: '/brand/ha-og-default.png', width: 1200, height: 630, alt: 'Haviv Academy — אקדמיית חביב' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Haviv Academy',
+    description: 'קורסים, מדריכים ומעבדות אינטראקטיביות בעברית.',
+    images: ['/brand/ha-og-default.png'],
+  },
+  manifest: '/site.webmanifest',
+  icons: {
+    icon: [
+      { url: '/brand/ha-favicon.svg', type: 'image/svg+xml' },
+      { url: '/brand/ha-favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/brand/ha-favicon-16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/brand/ha-apple-touch-180.png', sizes: '180x180' }],
   },
 };
 

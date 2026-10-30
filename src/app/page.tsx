@@ -14,6 +14,7 @@ export default function HomePage() {
   const tracks = TRACKS.map((track) => ({
     ...track,
     courses: courses.filter((course) => course.tracks.includes(track.slug)).length,
+    labs: labs.filter((lab) => lab.tracks.includes(track.slug)).length,
     tutorials: listTutorials({ track: track.slug }).length,
   }));
 
@@ -92,7 +93,7 @@ export default function HomePage() {
                 <h3>{track.label}</h3>
                 <p>{track.blurb}</p>
                 <span className="stat">
-                  {track.courses} קורסים · {track.tutorials} מדריכים
+                  {track.courses} קורסים{track.labs ? ` · ${track.labs} מעבדות` : ''}{track.tutorials ? ` · ${track.tutorials} מדריכים` : ''}
                 </span>
               </Link>
             ))}

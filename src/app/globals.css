@@ -1,21 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=IBM+Plex+Sans+Hebrew:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
+  /* surfaces */
   --paper: #edefe9;
   --surface: #f8f8f3;
   --ink: #151d21;
   --ink-soft: #4b565c;
-  --ink-faint: #77838a;
+  --ink-faint: #626d74;   /* 4.58:1 — replaces #77838a which failed AA at 3.36 */
   --rule: #c9cfc9;
   --rule-soft: #dde1da;
-  --blueprint: #0a5cbc;        /* TutsZone lineage: link/ink blue, AA on paper */
-  --blueprint-soft: #096fe0;   /* vivid brand blue, graphics + focus */
-  --teal: #26b9c1;             /* brand mid tone */
-  --mint: #3df5a7;             /* brand light tone */
-  --tint: #e0f2f3;             /* soft teal wash for chips */
-  --grad: linear-gradient(90deg, #096fe0 0%, #26b9c1 52%, #3df5a7 100%);
+
+  /* brand pigment (objects only: mark, premium, completion) */
+  --lime: #9de501;
+  --cyan: #04bde6;
+
+  /* atmosphere (time + seams only: progress, header strip, hero rule) */
+  --teal: #26b9c1;
+  --mint: #3df5a7;
+  --grad: linear-gradient(90deg, #3df5a7 0%, #26b9c1 48%, #096fe0 100%);
+  --tint: #e0f2f3;
+
+  /* text + semantic */
+  --blueprint: #0a5cbc;
+  --blueprint-soft: #096fe0;
+  --success: #1d7a44;
+  --warning: #8a5d00;
+  --danger: #a4302a;
+  --teal-deep: #0e6b63;
+
   --max: 1120px;
-  --reading: 68ch;
+  --lab-max: 1280px;
+  --reading: 62ch;
+  --r-panel: 4px;
+  --r-control: 2px;
 }
 
 * { box-sizing: border-box; }
@@ -23,6 +40,7 @@
 html { -webkit-text-size-adjust: 100%; }
 
 body {
+  overflow-x: clip;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -42,7 +60,7 @@ h1, h2, h3, h4 {
   color: var(--ink);
 }
 
-h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); font-weight: 900; }
+h1 { font-size: clamp(2.1rem, 4.2vw, 3.3rem); font-weight: 700; line-height: 1.1; }
 h2 { font-size: clamp(1.5rem, 2.6vw, 2.05rem); }
 h3 { font-size: 1.2rem; }
 
@@ -55,6 +73,7 @@ ul, ol { padding-inline-start: 1.35em; }
 
 code, pre, .mono, .num {
   font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
 }
 
 code {
@@ -68,7 +87,7 @@ pre {
   background: #17232b;
   color: #e7ecec;
   padding: 1rem 1.15rem;
-  border-radius: 6px;
+  border-radius: var(--r-panel);
   overflow-x: auto;
   direction: ltr;
   text-align: left;
@@ -111,26 +130,31 @@ th { font-weight: 600; color: var(--ink-soft); font-size: 0.88rem; }
   height: 3px;
   background: var(--grad);
 }
+.bar-account { margin-inline-start: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .site-header .bar {
   display: flex;
   align-items: center;
   gap: 28px;
   min-height: 68px;
 }
-.brand { display: flex; align-items: baseline; gap: 10px; flex-shrink: 0; }
-.brand strong {
+.brand { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; color: var(--ink); }
+.brand svg { flex-shrink: 0; }
+.brand-word { display: flex; flex-direction: column; gap: 1px; line-height: 1; }
+.brand-word strong {
   font-family: 'Frank Ruhl Libre', serif;
-  font-size: 1.3rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
-.brand span {
-  font-size: 0.76rem;
+.brand-word em {
+  font-style: normal;
+  font-size: 0.72rem;
   color: var(--ink-faint);
-  font-family: 'IBM Plex Mono', monospace;
-  letter-spacing: 0.04em;
-  direction: ltr;
+  letter-spacing: 0;
 }
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-brand strong { font-family: 'Frank Ruhl Libre', serif; font-size: 1.06rem; }
+a.brand:hover .brand-word strong { color: var(--blueprint); }
 .nav { display: flex; gap: 22px; margin-inline-start: auto; align-items: center; }
 .nav a {
   font-size: 0.96rem;
@@ -148,6 +172,16 @@ th { font-weight: 600; color: var(--ink-soft); font-size: 0.88rem; }
   font-size: 0.92rem;
 }
 .nav .account:hover { background: var(--ink); color: var(--surface); }
+.nav-quiet {
+  font: inherit;
+  font-size: 0.86rem;
+  background: none;
+  border: 0;
+  padding: 4px 2px;
+  color: var(--ink-faint);
+  cursor: pointer;
+}
+.nav-quiet:hover { color: var(--ink); }
 
 .site-footer {
   border-top: 1px solid var(--rule);
@@ -179,7 +213,7 @@ main { display: block; }
 .hero-ledger {
   align-self: end;
   border-top: 3px solid transparent;
-  border-image: linear-gradient(90deg, #096fe0 0%, #26b9c1 52%, #3df5a7 100%) 1;
+  border-image: linear-gradient(90deg, #3df5a7 0%, #26b9c1 48%, #096fe0 100%) 1;
   padding-top: 12px;
 }
 .hero-ledger .caption {
@@ -201,6 +235,12 @@ main { display: block; }
 }
 .hero-ledger .idx { font-family: 'IBM Plex Mono', monospace; color: var(--ink-faint); font-size: 0.8rem; }
 .hero-ledger .meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.76rem; color: var(--ink-faint); white-space: nowrap; }
+
+
+/* grid children must be allowed to shrink, or wide content pushes the page sideways on mobile */
+.hero-grid > *, .learn > *, .course-grid > *, .cards > * { min-width: 0; }
+.hero-ledger { max-width: 100%; }
+.hero-ledger .caption, .hero-ledger li { min-width: 0; }
 
 /* ---------- buttons ---------- */
 
@@ -394,12 +434,14 @@ main { display: block; }
   font-size: 0.76rem;
   color: var(--ink-faint);
   align-self: center;
+  padding-inline-end: 2px;
 }
 
 .lock { font-size: 0.72rem; opacity: 0.55; margin-inline-start: 6px; }
 .tag.free { background: var(--tint); border-color: var(--teal); color: #0e6b63; margin-inline-start: 8px; }
 
 .track-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.track-note { color: var(--ink-soft); font-size: 0.94rem; padding-block: 18px; border-bottom: 1px solid var(--rule-soft); }
 .track-card {
   border: 1px solid var(--rule);
   border-top: 3px solid var(--ink);
@@ -426,7 +468,7 @@ main { display: block; }
   margin-top: 34px;
   border: 1px solid var(--rule);
   border-top: 3px solid transparent;
-  border-image: linear-gradient(90deg, #096fe0 0%, #26b9c1 52%, #3df5a7 100%) 1;
+  border-image: linear-gradient(90deg, #3df5a7 0%, #26b9c1 48%, #096fe0 100%) 1;
   background: var(--surface);
   padding: 26px 26px 24px;
 }
@@ -461,7 +503,7 @@ main { display: block; }
 .plan[data-featured='true'] { border-color: var(--ink); border-top: 3px solid var(--ink); }
 .plan-flag {
   position: absolute;
-  inset-inline-end: 18px;
+  inset-inline-end: -1px;
   top: -1px;
   background: var(--ink);
   color: var(--surface);
@@ -470,7 +512,7 @@ main { display: block; }
 }
 .plan h3 { font-family: 'IBM Plex Sans Hebrew', sans-serif; font-size: 1rem; font-weight: 600; }
 .plan-price { display: flex; align-items: baseline; gap: 8px; }
-.plan-price b { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2rem; font-weight: 900; letter-spacing: -0.02em; }
+.plan-price b { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; unicode-bidi: isolate; }
 .plan-price span { font-size: 0.86rem; color: var(--ink-soft); }
 .plan p { font-size: 0.92rem; color: var(--ink-soft); margin: 0; }
 .plan .btn { margin-top: auto; }
@@ -559,6 +601,55 @@ main { display: block; }
 
 :focus-visible { outline: 2px solid var(--blueprint-soft); outline-offset: 2px; }
 
+/* ---------- badges ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: var(--r-control);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.badge-premium { background: var(--lime); color: var(--ink); }
+.badge-dev { border: 1px dashed var(--ink-faint); color: var(--ink-soft); background: transparent; }
+.badge-free { border: 1px solid var(--rule); color: var(--ink-soft); }
+
+/* ---------- premium surfaces ---------- */
+
+.paywall {
+  border-inline-start: 3px solid var(--lime);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  border-inline-end: 1px solid var(--rule);
+  background: var(--surface);
+  border-radius: var(--r-panel);
+}
+
+/* ---------- lab bay: the iframe framed as an instrument, not a sticker ---------- */
+
+.lab-bay { background: var(--ink); padding: 12px 12px 0; }
+.lab-bay-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding-inline: 4px 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  color: #cfd6d9;
+  direction: ltr;
+}
+.lab-bay-head .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); }
+.lab-bay-head .spacer { flex: 1; }
+.lab-bay-head a { color: #cfd6d9; text-decoration: underline; text-underline-offset: 3px; }
+.lab-bay-body { position: relative; background: var(--paper); }
+.lab-bay-body iframe { display: block; width: 100%; height: calc(100vh - 130px); border: 0; }
+.lab-seam { height: 2px; background: var(--grad); }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
@@ -574,8 +665,30 @@ main { display: block; }
   .ledger-row .level, .ledger-row .cta { grid-column: 2; justify-self: start; }
   .ledger-row .level { display: flex; gap: 10px; align-items: baseline; }
   .ledger-row .level b { display: inline; }
-  .nav { gap: 14px; }
-  .nav a { font-size: 0.9rem; }
-  .site-header .bar { gap: 14px; flex-wrap: wrap; padding-block: 10px; }
-  .brand span { display: none; }
+  .site-header .bar { gap: 10px 14px; flex-wrap: wrap; padding-block: 10px; }
+  .nav { order: 3; }
+  .bar-account { order: 2; }
+  .brand-word em { display: none; }
+  .brand-word strong { font-size: 1.08rem; }
+  /* nav becomes a single scrollable rail instead of overflowing the viewport */
+  .nav {
+    width: 100%;
+    gap: 16px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-block: 2px 6px;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a, .nav .account, .nav-quiet { font-size: 0.9rem; white-space: nowrap; }
+}
+
+@media (max-width: 560px) {
+  .brand svg { width: 26px; height: 26px; }
+  .hero-ledger { margin-inline: 0; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .plan-price b { font-size: 1.9rem; }
+  .hero-stats, .stats { flex-wrap: wrap; }
+  .hero-ledger .caption { padding-inline-end: 2px; }
 }

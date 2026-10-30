@@ -49,7 +49,7 @@ export default function PricingPage({ searchParams }: { searchParams: { waitlist
               {plan.featured ? <div className="plan-flag">מומלץ</div> : null}
               <h3>{plan.name}</h3>
               <div className="plan-price">
-                <b>{plan.price}</b>
+                <b dir="ltr">{plan.price}</b>
                 <span>{plan.period}</span>
               </div>
               <p>{plan.pitch}</p>

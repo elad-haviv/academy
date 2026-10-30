@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Mark } from './Mark';
 
 export function SiteFooter() {
   return (
@@ -6,8 +7,11 @@ export function SiteFooter() {
       <div className="wrap">
         <div className="cols">
           <div style={{ maxWidth: '34ch' }}>
-            <strong style={{ fontFamily: "'Frank Ruhl Libre', serif", fontSize: '1.1rem' }}>Haviv Academy</strong>
-            <p style={{ marginTop: 8 }}>
+            <div className="footer-brand">
+              <Mark size={26} />
+              <strong>Haviv Academy</strong>
+            </div>
+            <p style={{ marginTop: 10 }}>
               לימוד הנדסה, חשמל ותוכנה בעברית — קורסים בקצב שלך, מדריכים קצרים ומעבדות שבהן מתרגלים על מערכת אמיתית ולא על שקופית.
             </p>
           </div>
@@ -21,8 +25,8 @@ export function SiteFooter() {
           <div>
             <h4>החשבון שלי</h4>
             <Link href="/dashboard">הלימודים שלי</Link>
+            <Link href="/pricing">מנוי וחינם</Link>
             <Link href="/login">התחברות</Link>
-            <Link href="/register">הרשמה</Link>
           </div>
           <div>
             <h4>על האתר</h4>
@@ -34,7 +38,7 @@ export function SiteFooter() {
         </div>
         <div className="footer-note">
           <span>Haviv Academy — הדור הבא של TutsZone. נבנה ומתוחזק בידי אלעד חביב.</span>
-          <span className="mono">academy.haviv.pro</span>
+          <span className="mono" dir="ltr">academy.haviv.pro</span>
         </div>
       </div>
     </footer>

@@ -63,9 +63,13 @@ export default function TrackPage({ params, searchParams }: TrackParams) {
               <LedgerRow key={course.slug} course={course} index={index} />
             ))}
           </div>
+        ) : labs.length || tutorials.length ? (
+          <p className="track-note">
+            אין עדיין קורסים שלמים במסלול הזה — המעבדות והמדריכים שכן קיימים נמצאים למטה.
+          </p>
         ) : (
           <div className="empty" style={{ marginTop: 24 }}>
-            <h3>אין עדיין קורסים במסלול הזה</h3>
+            <h3>אין עדיין תוכן במסלול הזה</h3>
             <p>התוכן הבא שנבנה מיועד בדיוק לכאן. בינתיים אפשר לעבור על כל הקטלוג.</p>
             <Link href="/courses" className="btn ghost small">
               לכל הקורסים

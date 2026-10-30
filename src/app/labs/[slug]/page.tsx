@@ -25,7 +25,22 @@ export default function LabPage({ params }: { params: { slug: string } }) {
   const embeddable = Boolean(lab.externalUrl && lab.externalUrl.startsWith('/')) && !locked;
 
   if (embeddable && lab.externalUrl) {
-    return <iframe className="lab-frame" src={lab.externalUrl} title={lab.title} />;
+    return (
+      <div className="lab-bay">
+        <div className="lab-bay-head">
+          <span className="dot" aria-hidden="true" />
+          <span>haviv-academy / lab / {params.slug}</span>
+          <span className="spacer" />
+          <a href={lab.externalUrl} target="_blank" rel="noreferrer">
+            open full screen
+          </a>
+        </div>
+        <div className="lab-bay-body">
+          <iframe src={lab.externalUrl} title={lab.title} />
+        </div>
+        <div className="lab-seam" aria-hidden="true" />
+      </div>
+    );
   }
 
   return (
