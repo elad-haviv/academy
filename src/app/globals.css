@@ -240,6 +240,13 @@ footer { border-top: 1px solid var(--ink); background: var(--tint); padding: 28p
 
 .mini-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); margin: 14px 0 6px; }
 
+/* Hebrew must never inherit the mono micro-label treatment: that face has no
+   Hebrew glyphs, and its tracking visually splits the letters ("מ י ד ע"). */
+:lang(he) :is(.foot-cols b, .mini-label, .eyebrow, .facts dt, .crumbs, .admin-stats dt, .admin-nav, .editor-label) {
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
 .chip { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; padding: 3px 7px; border: 1px solid currentColor; }
 .chip-ok { color: var(--live); }
 .chip-soon { color: var(--soon); background: var(--soon-wash); border-color: transparent; }
