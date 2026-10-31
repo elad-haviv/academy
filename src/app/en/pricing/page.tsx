@@ -31,8 +31,8 @@ export default function EnPricing() {
           </p>
           <h1>Pricing</h1>
           <p className="lede">
-            One plan, two billing cycles. The labs are the product, so they sit behind the paid plan —
-            tutorials and the first lesson of every course stay free.
+            One plan, two billing cycles. Everything opens in a 7-day trial — both labs, every lesson
+            and every tutorial — with no card.
           </p>
         </header>
 
@@ -42,7 +42,7 @@ export default function EnPricing() {
           <div className="plan">
             <b className="name">Free</b>
             <span className="pnum">₪0</span>
-            <p>All written tutorials, the first lesson of each course, full catalogue.</p>
+            <p>All written tutorials, the first lesson of every course, the full catalogue.</p>
             <Link className="btn ghosted" href="/tutorials">
               Browse tutorials
             </Link>

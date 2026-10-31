@@ -9,23 +9,23 @@ export function Hero({ totals }: { totals: { labs: number; lessons: number; tuto
         <div className="hero-copy">
           <p className="eyebrow">
             <span className="pip" aria-hidden="true" />
-            מעבדות · עדכון אוקטובר 2026
+            למידה בנגיעה · מהטלפון · בעברית
           </p>
           <h1>
-            המעבדה היא <em>המוצר</em>.
+            שיעור קצר.
             <br />
-            האקדמיה היא המדף.
+            ואז <em>ניסוי וטעייה</em>.
           </h1>
           <p className="lede">
-            מערכת תאורת מסלולים שאפשר להפעיל, לשבור ולאבחן — עם תקלות אמיתיות, מדידות אמיתיות
-            והשלכות. לא סרטון, לא מצגת.
+            בלי פרקים ארוכים ובלי סרטון שמאבד את הפוקוס. בכל שיעור רעיון אחד, ואחריו מעבדה
+            אינטראקטיבית שמגיבה לכל פעולה — גם כשהיא טעות.
           </p>
           <div className="cta-row">
             <Link className="btn lg" href="/labs/agl-field-course">
               כניסה למעבדה
             </Link>
-            <Link className="ghost lg" href="/for-employers">
-              למעסיקים ›
+            <Link className="ghost lg" href="/labs">
+              מה יש בפנים ›
             </Link>
           </div>
           <dl className="facts">

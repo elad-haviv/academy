@@ -29,13 +29,13 @@ export default async function DashboardPage() {
           <div>
             <p className="eyebrow">
               <span className="pip" aria-hidden="true" />
-              {full ? 'גישה מלאה · ניסיון או מנוי' : 'חשבון חינמי'}
+              {full ? 'גישה מלאה · ניסיון או מנוי' : 'חשבון חינם'}
             </p>
             <h1>שלום, {user!.name}</h1>
             <p className="lede">
               {full
-                ? 'כל המעבדות והשיעורים פתוחים בפניך.'
-                : 'המדריכים והשיעור הראשון בכל קורס פתוחים. מעבדות דורשות מנוי.'}
+                ? 'כל המעבדות והשיעורים פתוחים. הכי קצר להתחיל: שיעור, ואז מעבדה.'
+                : 'המדריכים והשיעור הראשון בכל קורס פתוחים. המעבדות דורשות מנוי.'}
             </p>
           </div>
           <form action={logoutAction}>
@@ -47,7 +47,7 @@ export default async function DashboardPage() {
 
         <section className="dash-block">
           <div className="sec-head">
-            <h2>המעבדות שלך</h2>
+            <h2>המעבדות שלכם</h2>
             <Link className="sec-link" href="/labs">
               כל המעבדות ›
             </Link>
@@ -78,7 +78,7 @@ export default async function DashboardPage() {
 
         <section className="dash-block">
           <div className="sec-head">
-            <h2>ההתקדמות שלך</h2>
+            <h2>ההתקדמות שלכם</h2>
             <Link className="sec-link" href="/courses">
               כל הקורסים ›
             </Link>

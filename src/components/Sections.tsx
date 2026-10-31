@@ -11,7 +11,7 @@ export function Pricing() {
         <div className="plans">
           <div className="plan">
             <b className="name">חינם</b>
-            <p>כל המדריכים, השיעור הראשון בכל קורס, והקטלוג המלא.</p>
+            <p>כל המדריכים, השיעור הראשון בכל קורס והקטלוג המלא.</p>
             <Link className="btn ghosted" href="/register">
               פתיחת חשבון
             </Link>
@@ -23,9 +23,9 @@ export function Pricing() {
               ₪349
             </b>
             <span className="per">לשנה</span>
-            <p>כל השיעורים, שתי המעבדות, קבצים מצורפים. ניסיון 7 ימים בלי כרטיס.</p>
+            <p>כל השיעורים, שתי המעבדות וכל הקבצים. ניסיון 7 ימים, בלי כרטיס.</p>
             <Link className="btn" href="/register?plan=annual">
-              התחלה
+              התחילו ניסיון
             </Link>
           </div>
           <div className="plan">
@@ -34,9 +34,9 @@ export function Pricing() {
               ₪39
             </b>
             <span className="per">לחודש</span>
-            <p>אותה גישה, בלי התחייבות שנתית.</p>
+            <p>אותה גישה מלאה, בלי התחייבות שנתית.</p>
             <Link className="btn ghosted" href="/register?plan=monthly">
-              חודשי
+              מנוי חודשי
             </Link>
           </div>
         </div>
@@ -51,9 +51,9 @@ export function EmployerBand() {
       <div className="wrap">
         <div className="emp-in">
           <div>
-            <h2>מעסיקים והכשרות</h2>
+            <h2>מכשירים צוות?</h2>
             <p>
-              רישיונות לפי מושב, חשבונית עם מע״מ, תוכנית הכשרה לפי תפקיד, ודוח התקדמות. מתאים
+              רישיונות לפי מושב, חשבונית עם מע״מ, תוכנית הכשרה לפי תפקיד ודוח התקדמות. מתאים
               לשדות תעופה, קבלנים ומכללות.
             </p>
           </div>
@@ -72,7 +72,7 @@ export function SiteFooter() {
       <div className="wrap foot-in">
         <div className="foot-brand">
           <b>Haviv Academy</b>
-          <span>מעבדות לחשמל ולתעשייה · ישראל</span>
+          <span>למידה אינטראקטיבית לחשמל ולתעשייה · ישראל</span>
         </div>
         <div className="foot-cols">
           <div>

@@ -6,9 +6,9 @@ export function Shelf({ courses }: { courses: CourseRow[] }) {
     return (
       <section className="wrap shelf">
         <div className="sec-head">
-          <h2>על המדף</h2>
+          <h2>קורסים קצרים</h2>
         </div>
-        <p className="note">הקורסים בעבודה. בינתיים — המעבדות פתוחות.</p>
+        <p className="note">הקורסים בדרך. בינתיים — המעבדות פתוחות.</p>
       </section>
     );
   }
@@ -16,7 +16,7 @@ export function Shelf({ courses }: { courses: CourseRow[] }) {
   return (
     <section className="wrap shelf">
       <div className="sec-head">
-        <h2>על המדף</h2>
+        <h2>קורסים קצרים</h2>
         <Link className="sec-link" href="/courses">
           כל הקורסים ›
         </Link>
@@ -42,23 +42,23 @@ export function Steps() {
     <section className="how">
       <div className="wrap">
         <div className="sec-head">
-          <h2>מה קורה בפנים</h2>
+          <h2>איך לומדים כאן</h2>
         </div>
         <ol className="steps">
           <li>
             <span className="num">01</span>
-            <b>מקבלים תקלה</b>
-            <p>תרחיש עם סימפטום, לא עם תשובה. המסלול כבוי בקטע אחד ואתה לא יודע למה.</p>
+            <b>שיעור קצר</b>
+            <p>רעיון אחד, שלוש דקות קריאה: מה זה, למה זה חשוב ואיך מזהים תקלה.</p>
           </li>
           <li>
             <span className="num">02</span>
-            <b>מודדים ומשערים</b>
-            <p>זרם, התנגדות, רציפות. כל פעולה משנה את המערכת, כולל פעולות שגויות.</p>
+            <b>מפעילים בעצמכם</b>
+            <p>נכנסים לסימולציה: מפעילים, מנתקים, מודדים. כל פעולה משנה את המערכת, כולל פעולות שגויות.</p>
           </li>
           <li>
             <span className="num">03</span>
-            <b>מתקנים ומוודאים</b>
-            <p>התיקון נבדק מול מצב המערכת. תיקון שנראה נכון אבל מפיל קטע אחר — נכשל.</p>
+            <b>מבינים מהטעות</b>
+            <p>טעות לא נועלת אתכם החוצה — היא מצב חדש במערכת. מתקנים, מודדים שוב, ורואים בדיוק מה השתנה.</p>
           </li>
         </ol>
       </div>

@@ -13,7 +13,7 @@ export default function NotFound() {
         </p>
         <h1>הדף הזה לא כאן</h1>
         <p className="lede">
-          או שהקישור השתנה, או שהתוכן עוד לא עלה. שתי המעבדות וכל השיעורים נמצאים בעמודים הראשיים.
+          או שהקישור השתנה, או שהתוכן עוד בדרך. המעבדות והשיעורים נמצאים בעמודים הראשיים.
         </p>
         <div className="cta-row">
           <Link className="btn lg" href="/labs">

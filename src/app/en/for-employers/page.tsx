@@ -45,8 +45,8 @@ export default async function EnEmployers({
           </p>
           <h1>Train the team, not one person</h1>
           <p className="lede">
-            The same content with organisational access: seats, invoice, role-based plan and
-            completion reporting. Reply within one business day.
+            The same short lessons and simulators, with organisational access: seats, invoice,
+            role-based plan and completion reporting. Reply within one business day.
           </p>
         </header>
 

@@ -34,8 +34,8 @@ export default function EnLabs() {
           </p>
           <h1>Labs</h1>
           <p className="lede">
-            Each lab is a system you can run, break and diagnose. There is a fault, there are
-            measurements, and there are consequences — including ones that darken an entire circuit.
+            Each lab is a working system: switch it, disconnect it, break it — and measure what
+            changed. Nothing to watch. Everything responds, including to a wrong decision.
           </p>
         </header>
         {labs.map((lab) => (

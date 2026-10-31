@@ -41,10 +41,10 @@ export default async function PlayPage({ params }: { params: Promise<{ slug: str
             <span>הפעלה</span>
           </nav>
           <div className="play-gate">
-            <h1>המעבדה פתוחה במנוי</h1>
+            <h1>המעבדה פתוחה בניסיון ובמנוי</h1>
             <p className="lede">
-              {lab.title} — {duration(lab.minutes)} של תרחישים, מדידות והשלכות. הניסיון כולל גישה
-              מלאה ל־7 ימים, בלי כרטיס אשראי.
+              {lab.title} — {duration(lab.minutes)} של תרחישים, מדידות והשלכות. ניסיון של 7 ימים פותח
+              את המעבדה, בלי כרטיס אשראי.
             </p>
             <ul className="checklist">
               {lab.outcomes.map((o) => (

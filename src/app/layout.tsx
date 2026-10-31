@@ -28,11 +28,11 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Haviv Academy — מעבדות לחשמל ולתעשייה',
+    default: 'Haviv Academy — למידה אינטראקטיבית לחשמל ולתעשייה',
     template: '%s · Haviv Academy',
   },
   description:
-    'מעבדות אינטראקטיביות לחשמל ולתעשייה: תאורת מסלולים וגנרטורים. מפעילים, שוברים ומאבחנים — עם מדידות אמיתיות והשלכות.',
+    'למידה אינטראקטיבית לחשמל ולתעשייה: שיעורים קצרים ואז מעבדה שמגיבה לכל פעולה. תאורת מסלולים וגנרטורים, בעברית, מהטלפון.',
   metadataBase: new URL('https://academy.haviv.pro'),
   alternates: { canonical: '/', languages: { he: '/', en: '/en' } },
   openGraph: {
@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     locale: 'he_IL',
     siteName: 'Haviv Academy',
     url: 'https://academy.haviv.pro',
-    images: [{ url: '/img/og.png', width: 1200, height: 630, alt: 'Haviv Academy — מעבדות לחשמל ולתעשייה' }],
+    images: [{ url: '/img/og.png', width: 1200, height: 630, alt: 'Haviv Academy — למידה אינטראקטיבית לחשמל ולתעשייה' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Haviv Academy',
-    description: 'מעבדות אינטראקטיביות לתאורת מסלולים ולגנרטורים.',
+    description: 'שיעורים קצרים ומעבדות אינטראקטיביות לתאורת מסלולים ולגנרטורים.',
     images: ['/img/og.png'],
   },
   robots: { index: true, follow: true },
@@ -60,7 +60,7 @@ const ORG_LD = {
   url: 'https://academy.haviv.pro',
   logo: 'https://academy.haviv.pro/img/og.png',
   description:
-    'מעבדות אינטראקטיביות לחשמל ולתעשייה: תאורת מסלולים וגנרטורים, בעברית, עם אימות תוכן.',
+    'פלטפורמת למידה אינטראקטיבית לחשמל ולתעשייה: שיעורים קצרים ומעבדות סימולציה בעברית, עם אימות תוכן.',
   areaServed: 'IL',
   knowsLanguage: ['he', 'en'],
 };

@@ -82,7 +82,7 @@ export default async function LessonPage({
             </p>
             <h1>{item.title}</h1>
 
-            {done === '1' && <p className="notice">השיעור סומן כהושלם. אפשר להמשיך לבא.</p>}
+            {done === '1' && <p className="notice">השיעור סומן כהושלם. ממשיכים לבא.</p>}
 
             {unlocked ? (
               <div className="prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(item.body) }} />
@@ -92,14 +92,14 @@ export default async function LessonPage({
                   <div dangerouslySetInnerHTML={{ __html: previewMarkdown(item.body) }} />
                 </div>
                 <div className="paywall">
-                  <b>כאן נגמר הטעימה</b>
+                  <b>עד כאן החינם</b>
                   <p>
-                    השיעור המלא, כל 17 השיעורים ושתי המעבדות פתוחים במנוי — ₪349 לשנה, או ₪39 לחודש.
-                    ניסיון 7 ימים בלי כרטיס.
+                    השיעור המלא, כל השיעורים ושתי המעבדות פתוחים בניסיון של 7 ימים — ואחריו ₪349 לשנה
+                    או ₪39 לחודש.
                   </p>
                   <div className="cta-row">
                     <Link className="btn lg" href="/register?plan=annual">
-                      התחלת ניסיון
+                      התחילו ניסיון
                     </Link>
                     <Link className="ghost lg" href="/pricing">
                       השוואת מסלולים ›

@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Haviv Academy — hands-on labs for electrical & industrial teams',
   description:
-    'Interactive simulators for airfield lighting and generator systems. Built for Israeli electrical teams and the organisations that train them.',
+    'Interactive learning for electrical and industrial teams: a short lesson, then a simulator that answers every move. Airfield lighting and generators, in Hebrew.',
   alternates: { canonical: 'https://academy.haviv.pro/en', languages: { he: '/' } },
 };
 
@@ -41,17 +41,17 @@ export default function EnHome() {
         <section className="en-hero">
           <p className="eyebrow">
             <span className="pip" aria-hidden="true" />
-            Israel · electrical &amp; industrial training
+            Israel · interactive training
           </p>
           <h1>
-            The lab is the product.
+            A short lesson.
             <br />
-            The courses are the shelf.
+            Then trial and error.
           </h1>
           <p className="lede">
-            Two working simulators: airfield lighting series circuits and generator systems. Learners
-            switch, break, measure and diagnose — in Hebrew, on real equipment behaviour. Courses exist
-            to prepare for the lab, not to replace it.
+            No hour-long videos, no walls of text. Each lesson carries one idea, then a working
+            simulator answers every move — including the wrong ones. Two labs today: airfield lighting
+            series circuits and standby generators.
           </p>
           <div className="cta-row">
             <Link className="btn lg" href="/en/for-employers">

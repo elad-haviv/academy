@@ -7,7 +7,7 @@ import { duration } from '@/lib/format';
 export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'מדריכים',
-  description: 'מדריכים קצרים בעברית: Docker, git, SSH, CSS ועוד — חינם, בלי הרשמה.',
+  description: 'מדריכים קצרים בעברית — Docker, git, SSH, CSS ועוד. חינם, בלי הרשמה.',
 };
 
 export default function TutorialsPage() {
@@ -24,8 +24,8 @@ export default function TutorialsPage() {
           </p>
           <h1>מדריכים</h1>
           <p className="lede">
-            כל מדריך כאן פתוח בלי הרשמה ובלי תשלום. זה החלון הראווה: אם משהו כאן עזר לך, המעבדות
-            הן ההמשך הטבעי.
+            מדריכים קצרים, בלי הרשמה ובלי תשלום. קוראים בחמש דקות וממשיכים הלאה. אם משהו כאן עזר —
+            המעבדות הן ההמשך.
           </p>
         </header>
 

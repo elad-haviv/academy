@@ -9,10 +9,10 @@ export const dynamic = 'force-dynamic';
 export const metadata = { title: 'פתיחת חשבון' };
 
 const ERRORS: Record<string, string> = {
-  name: 'צריך שם באורך שני תווים לפחות.',
+  name: 'צריך שם של שני תווים לפחות.',
   email: 'כתובת אימייל לא תקינה.',
   password: 'סיסמה קצרה מדי — לפחות 8 תווים.',
-  exists: 'כבר יש חשבון עם האימייל הזה. נסה להיכנס.',
+  exists: 'יש כבר חשבון עם האימייל הזה. נסו להיכנס.',
 };
 
 export default async function RegisterPage({
@@ -31,10 +31,10 @@ export default async function RegisterPage({
         <div className="auth-card">
           <h1>פתיחת חשבון</h1>
           <p className="auth-sub">
-            7 ימים מלאים, בלי כרטיס אשראי. כולל שתי המעבדות וכל השיעורים.
+            7 ימים של גישה מלאה, בלי כרטיס אשראי: שתי המעבדות וכל השיעורים.
             {plan === 'annual' && ' אחרי הניסיון: ₪349 לשנה.'}
           </p>
-          {error && <p className="form-error">{ERRORS[error] ?? 'משהו נכשל. נסה שוב.'}</p>}
+          {error && <p className="form-error">{ERRORS[error] ?? 'משהו נכשל. נסו שוב.'}</p>}
           <form action={registerAction} className="form">
             <input type="hidden" name="next" value={next ?? '/dashboard'} />
             <label>

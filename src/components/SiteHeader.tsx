@@ -42,7 +42,7 @@ export async function SiteHeader({ current = 'labs' }: { current?: string }) {
                   כניסה
                 </Link>
                 <Link className="btn" href="/register">
-                  ניסיון 7 ימים
+                  ניסיון חינם
                 </Link>
               </>
             )}

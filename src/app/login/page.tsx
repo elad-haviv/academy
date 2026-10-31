@@ -28,8 +28,8 @@ export default async function LoginPage({
       <main className="wrap auth">
         <div className="auth-card">
           <h1>כניסה</h1>
-          <p className="auth-sub">המשך מהמקום שבו הפסקת.</p>
-          {error && <p className="form-error">{ERRORS[error] ?? 'משהו נכשל. נסה שוב.'}</p>}
+          <p className="auth-sub">ממשיכים מהמקום שבו הפסקתם.</p>
+          {error && <p className="form-error">{ERRORS[error] ?? 'משהו נכשל. נסו שוב.'}</p>}
           <form action={loginAction} className="form">
             <input type="hidden" name="next" value={next ?? '/dashboard'} />
             <label>
@@ -45,7 +45,7 @@ export default async function LoginPage({
             </button>
           </form>
           <p className="auth-alt">
-            אין חשבון? <Link href="/register">פתיחה בניסיון 7 ימים</Link>
+            אין חשבון? <Link href="/register">פתיחת חשבון בניסיון 7 ימים</Link>
           </p>
         </div>
       </main>

@@ -54,8 +54,8 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
         <aside className="article-foot">
           <div className="emp-in">
             <div>
-              <h2>רוצה להפעיל מערכת, לא רק לקרוא?</h2>
-              <p>שתי מעבדות אינטראקטיביות: תאורת מסלולים וגנרטורים. ניסיון 7 ימים בלי כרטיס.</p>
+              <h2>רוצים להפעיל מערכת, לא רק לקרוא?</h2>
+              <p>שתי מעבדות אינטראקטיביות: תאורת מסלולים וגנרטורים. ניסיון של 7 ימים, בלי כרטיס.</p>
             </div>
             <Link className="btn lg" href="/labs">
               למעבדות

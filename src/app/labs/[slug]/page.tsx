@@ -59,7 +59,7 @@ export default async function LabPage({ params }: { params: Promise<{ slug: stri
             <div className="cta-row">
               {live ? (
                 <Link className="btn lg" href={entitled ? `/labs/${lab.slug}/play` : '/register?plan=annual'}>
-                  {entitled ? 'כניסה למעבדה' : 'ניסיון 7 ימים — כניסה'}
+                  {entitled ? 'כניסה למעבדה' : 'ניסיון 7 ימים — התחילו'}
                 </Link>
               ) : (
                 <Link className="btn lg" href="/for-employers">
@@ -100,7 +100,7 @@ export default async function LabPage({ params }: { params: Promise<{ slug: stri
             </ul>
           </section>
           <section>
-            <h2>מה נשבר — ולמה זה מלמד</h2>
+            <h2>מה נשבר, ומה לומדים מזה</h2>
             <ul className="checklist fault">
               {lab.failureModes.map((o) => (
                 <li key={o}>{o}</li>

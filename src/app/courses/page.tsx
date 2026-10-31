@@ -7,7 +7,7 @@ import { duration, lessons as lessonLabel } from '@/lib/format';
 export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'קורסים',
-  description: 'המדף: קורסים קצרים ומעשיים לחשמל ולתוכנה, בעברית.',
+  description: 'קורסים קצרים בחשמל ובתוכנה, בעברית: שיעור קטן, ואז מעבדה אינטראקטיבית.',
 };
 
 export default function CoursesPage() {
@@ -20,12 +20,12 @@ export default function CoursesPage() {
         <header className="page-head">
           <p className="eyebrow">
             <span className="pip" aria-hidden="true" />
-            המדף · {lessonLabel(courses.reduce((s, c) => s + c.lesson_count, 0))}
+            שיעורים קצרים · {lessonLabel(courses.reduce((s, c) => s + c.lesson_count, 0))}
           </p>
           <h1>קורסים</h1>
           <p className="lede">
-            הקורסים הם המדף, לא המוצר. הם קיימים כדי לתת רקע לפני שמפעילים מעבדה — ולכן הם קצרים
-            וממוקדים.
+            כל קורס הוא רצף של שיעורים קצרים: רעיון אחד בכל שיעור, 3–4 דקות קריאה. הם מכינים
+            למעבדה, לא מחליפים אותה.
           </p>
         </header>
 
@@ -36,7 +36,7 @@ export default function CoursesPage() {
               <article className="course-card" key={c.slug}>
                 <div className="course-top">
                   <span className="tag">{c.category || 'כללי'}</span>
-                  <span className="chip chip-ok">ניסיון</span>
+                  <span className="chip chip-ok">פתוח לניסיון</span>
                 </div>
                 <h2>
                   <Link href={`/courses/${c.slug}`}>{c.title}</Link>
