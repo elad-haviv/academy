@@ -10,15 +10,46 @@
   "correctnessOwner": "Elad Haviv",
   "validatedOn": null,
   "cover": "/img/cover-genset.png",
-  "learnerRoles": ["טכנאי גנרטורים", "חשמלאי תעשייתי", "אחראי אחזקה"],
-  "buyerRoles": ["מחלקת תחזוקה בנמל תעופה", "אתר תעשייתי", "מכללה מקצועית"],
+  "learnerRoles": [
+    "טכנאי גנרטורים",
+    "חשמלאי תעשייתי",
+    "אחראי אחזקה"
+  ],
+  "buyerRoles": [
+    "מחלקת תחזוקה בנמל תעופה",
+    "אתר תעשייתי",
+    "מכללה מקצועית"
+  ],
   "outcomes": [
     "רצף התנעה והגנות",
     "ניתוק עומסים ומעבר מקור",
     "אבחון רעידות וטמפרטורה"
   ],
-  "failureModes": ["מעבר מקור ללא ניתוק עומס", "התעלמות מהגנת שמן", "הפעלה חוזרת על עומס יתר"],
-  "prerequisites": ["חשמל בסיסי", "מכונות"],
+  "failureModes": [
+    "מעבר מקור ללא ניתוק עומס",
+    "התעלמות מהגנת שמן",
+    "הפעלה חוזרת על עומס יתר"
+  ],
+  "prerequisites": [
+    "חשמל בסיסי",
+    "מכונות"
+  ],
   "minutes": 75,
-  "position": 2
+  "position": 2,
+  "titleEn": "Genset Academy",
+  "subtitleEn": "Generator systems: start failure, load transfer and the sequence that protects the load.",
+  "outcomesEn": [
+    "Diagnose a no-start condition in the right order",
+    "Run a load transfer without dropping critical load",
+    "Read the controller's event log against reality"
+  ],
+  "failureModesEn": [
+    "Bypassing the preheat sequence",
+    "Transferring load before the generator is stable",
+    "Ignoring a fuel solenoid fault"
+  ],
+  "prerequisitesEn": [
+    "Basic electrical theory",
+    "Engine fundamentals"
+  ]
 }

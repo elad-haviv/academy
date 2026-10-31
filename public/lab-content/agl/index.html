@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AGL Field Course</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&family=Heebo:wght@500;700;800&display=swap">
+<!-- Bump ?v= on every release so browsers and CDNs fetch the new CSS and JS -->
+<link rel="stylesheet" href="css/agl.css?v=20261110">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">AGL Field Course<small>Airfield Ground Lighting for electricians, engineers and designers</small></div>
+    <div class="spacer"></div>
+    <div class="seg lang" id="lang-seg" role="group" aria-label="Language / שפה">
+      <button type="button" data-lang="en" lang="en" aria-pressed="true">English</button>
+      <button type="button" data-lang="he" lang="he" dir="rtl" aria-pressed="false">עברית</button>
+    </div>
+    <div class="std">ICAO Annex 14 · FAA AC 150/5340-30<br>IEC 61820 · 61821 · 61822 · 61823</div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Course modules">
+    <div class="rail-label">Modules</div>
+    <a href="#overview" data-code="A"><span class="chip">A</span><span class="label">Start here</span></a>
+    <a href="#lights" data-code="B"><span class="chip">B</span><span class="label">Airfield lighting map</span></a>
+    <a href="#series" data-code="C"><span class="chip">C</span><span class="label">Series circuit simulator</span></a>
+    <a href="#equipment" data-code="D"><span class="chip">D</span><span class="label">CCRs, transformers, cable</span></a>
+    <a href="#details" data-code="E"><span class="chip">E</span><span class="label">3D installation details</span></a>
+    <a href="#vault" data-code="F"><span class="chip">F</span><span class="label">The vault</span></a>
+    <a href="#design" data-code="G"><span class="chip">G</span><span class="label">System design</span></a>
+    <a href="#calc" data-code="H"><span class="chip">H</span><span class="label">Design calculators</span></a>
+    <a href="#maint" data-code="J"><span class="chip">J</span><span class="label">Maintenance &amp; fault finding</span></a>
+    <a href="#quiz" data-code="K"><span class="chip">K</span><span class="label">Knowledge check</span></a>
+    <a href="#glossary" data-code="L"><span class="chip">L</span><span class="label">Glossary</span></a>
+    <a href="#reference" data-code="M"><span class="chip">M</span><span class="label">Reference tables</span></a>
+    <p class="rail-note">Module letters follow taxiway naming: there is no taxiway I, so neither is there a module I.</p>
+  </nav>
+
+  <main id="main" tabindex="-1">
+
+    <!-- A · Start here -->
+    <section class="module" data-module="overview" data-code="A">
+      <article class="lesson" data-title="Welcome">
+        <div class="module-head">
+          <h2>The runway at night is an electrical system</h2>
+          <p class="lede">Airfield Ground Lighting (AGL) is every light, sign and guidance aid on the movement area, plus the regulators, transformers and cable that keep each one at the right brightness. This course covers what pilots see, why the circuits are built the way they are, and how to size, maintain and fault-find them.</p>
+        </div>
+        <div class="callout danger">
+          <span class="sign"><span class="mand">DANGER</span></span>
+          <div>
+            <p><strong>Series circuits run at kilovolts.</strong> A constant current regulator will raise its output voltage to whatever it takes to push the set current, up to its rated maximum (about 4.5 kV for a 30 kVA, 6.6 A unit). Opening a primary circuit or an isolation transformer secondary while energised produces dangerous voltages.</p>
+            <p>Always isolate the regulator, open the series cutout, lock out, tag out and prove dead before work. This course is training material. It does not replace your aerodrome's procedures, the manufacturer's instructions or the current edition of the standards.</p>
+          </div>
+        </div>
+        <div id="resume"></div>
+      </article>
+
+      <article class="lesson">
+        <h3>Why AGL uses series circuits</h3>
+        <div class="prose">
+          <p>A runway edge circuit can be 5 to 10 km of cable with a hundred lights strung along it. On a parallel (constant voltage) feed, the lights at the far end would see a lower voltage and burn dimmer. Pilots judge distance and alignment from light patterns, so uneven brightness is not acceptable.</p>
+          <p>In a <strong>series circuit</strong> the same current flows through every light. A <strong>constant current regulator (CCR)</strong> holds that current at a set value, typically 6.6 A at full brightness. Every lamp sees the same current, so every lamp has the same intensity regardless of where it sits on the loop.</p>
+          <p>Each light connects to the loop through its own <strong>series isolation transformer</strong>. The primary winding is in series with the loop; the secondary feeds the lamp. When a lamp fails, the transformer keeps the loop closed and the rest stay lit.</p>
+        </div>
+        <div class="panel narrow">
+          <h4>The circuit, in four parts</h4>
+          <table class="stack">
+            <tbody>
+              <tr><th>CCR</th><td>Converts the 400 V / 480 V supply into a regulated current (2.8 to 6.6 A) at whatever voltage the loop needs.</td></tr>
+              <tr><th>Primary cable</th><td>5 kV class single-core cable running from the vault to every light base and back.</td></tr>
+              <tr><th>Isolation transformer</th><td>One per light. Keeps the loop closed when a lamp fails and isolates the lamp from the high-voltage primary.</td></tr>
+              <tr><th>Fixture</th><td>Halogen lamp or LED engine, elevated on a frangible coupling or inset flush with the pavement.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Pick your track</h3>
+        <div class="grid-3">
+          <div class="panel track">
+            <span class="who">Electrician / AGL technician</span>
+            <h4>Keep it lit, safely</h4>
+            <ol>
+              <li><a href="#lights">Airfield lighting map</a>: name every light by colour and position</li>
+              <li><a href="#series">Series circuit simulator</a>: what lamp failures and earth faults look like</li>
+              <li><a href="#details">3D installation details</a>: what is inside a light base</li>
+              <li><a href="#maint">Maintenance &amp; fault finding</a>: LOTO, meggering, sectionalising</li>
+              <li><a href="#quiz">Knowledge check</a>, electrician questions</li>
+            </ol>
+          </div>
+          <div class="panel track">
+            <span class="who">Electrical engineer</span>
+            <h4>Understand the equipment</h4>
+            <ol>
+              <li><a href="#series">Series circuit simulator</a>: current, voltage, load</li>
+              <li><a href="#equipment">CCRs, transformers, cable</a>: types, protections, ratings</li>
+              <li><a href="#calc">Design calculators</a>: CCR loading, insulation trends</li>
+              <li><a href="#maint">Fault finding</a>: double earth faults, open circuits</li>
+            </ol>
+          </div>
+          <div class="panel track">
+            <span class="who">System designer</span>
+            <h4>Lay out compliant systems</h4>
+            <ol>
+              <li><a href="#lights">Airfield lighting map</a>: CAT I vs CAT II/III patterns</li>
+              <li><a href="#design">System design</a>: circuits, interleaving, switch-over times</li>
+              <li><a href="#calc">CCR sizing calculator</a></li>
+              <li><a href="#quiz">Knowledge check</a>, designer questions</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- B · Lighting map -->
+    <section class="module" data-module="lights" data-code="B" hidden>
+      <article class="lesson" data-title="Explore the map">
+        <div class="module-head">
+          <h2>Runway 09, from the approach to the apron</h2>
+          <p class="lede">Select any light, or a system from the list under the map, to see its colour, spacing, purpose and how it is wired. Switch between CAT I and CAT II/III to see which systems low-visibility operations add. Lateral distances are exaggerated so the patterns stay readable; longitudinal distances are to scale.</p>
+        </div>
+          <div class="scene">
+            <div class="scene-bar">
+              <span class="ctl-label">Approach category
+                <span class="seg" id="cat-seg">
+                  <button type="button" data-cat="1" aria-pressed="false">CAT I</button>
+                  <button type="button" data-cat="3" aria-pressed="true">CAT II/III</button>
+                </span>
+              </span>
+              <span class="ctl-label">Brightness <span id="step-label" class="mono">B5</span>
+                <input type="range" id="map-step" min="0" max="5" value="5" step="1" aria-label="Brightness step">
+              </span>
+              <span class="ctl-label">View
+                <span class="seg" id="view-seg">
+                  <button type="button" data-view="color" aria-pressed="true">Light colours</button>
+                  <button type="button" data-view="circuit" aria-pressed="false">Circuits</button>
+                </span>
+              </span>
+              <span class="fail-group">
+                <button type="button" class="btn" id="fail-a" aria-pressed="false" hidden>Lose circuit A</button>
+                <button type="button" class="btn" id="fail-b" aria-pressed="false" hidden>Lose circuit B</button>
+              </span>
+            </div>
+            <p class="scroll-hint">Swipe the diagram sideways to see all of it.</p>
+            <div class="scene-svg" id="airfield"></div>
+            <div class="scene-legend" id="map-legend"></div>
+          </div>
+        <div class="map-below">
+          <aside class="panel info-card" id="light-info" aria-live="polite"></aside>
+          <div class="panel try">
+          <h4>Try this</h4>
+          <ol>
+            <li>Select the runway centreline lights. How does their colour tell the pilot how much runway is left?</li>
+            <li>Switch to CAT I. Which systems disappear?</li>
+            <li>Choose the Circuits view, then Lose circuit A. Is the runway still outlined?</li>
+            <li>Now lose circuit B as well. Which lights stay lit when both runway circuits fail? Then slide the brightness to Off.</li>
+            <li>Select the PAPI and fly the approach angle from 2° to 4°.</li>
+          </ol>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- C · Series circuit -->
+    <section class="module" data-module="series" data-code="C" hidden>
+      <article class="lesson" data-title="Run the simulator">
+        <div class="module-head">
+          <h2>One current, eight lights, one regulator</h2>
+          <p class="lede">This loop has a CCR, 4 km of primary cable and eight fixtures, each on its own isolation transformer. Change the brightness step, then break things: fail a lamp by selecting it, cut the cable, add earth faults. Watch which readings move and which stay put.</p>
+        </div>
+        <div class="controls">
+          <span class="ctl-label">Brightness step
+            <span class="seg" id="sim-steps"></span>
+          </span>
+          <span class="ctl-label">Fixtures
+            <select id="sim-fixture" aria-label="Fixture type">
+              <option value="hal">Halogen, 150 W</option>
+              <option value="led">LED, 30 W</option>
+            </select>
+          </span>
+        </div>
+        <div class="controls">
+          <button type="button" class="btn" id="sim-open">Cut primary cable</button>
+          <button type="button" class="btn" id="sim-ef1">Earth fault at fixture 3</button>
+          <button type="button" class="btn" id="sim-ef2">Earth fault at fixture 6</button>
+          <button type="button" class="btn danger" id="sim-reset">Reset circuit</button>
+        </div>
+        <p class="scroll-hint">Swipe the diagram sideways to see all of it.</p>
+        <div class="sim-wrap" id="sim"></div>
+        <div class="readouts" id="sim-readouts"></div>
+        <div class="alarms" id="sim-alarms"></div>
+        <div class="section">
+          <h4>What just happened</h4>
+          <div class="log" id="sim-log" aria-live="polite"></div>
+        </div>
+        <div class="panel try">
+          <h4>Try this</h4>
+          <ol>
+            <li>Step from B1 to B5. The current changes, and all lamps change together.</li>
+            <li>Select lamp 3 to fail it. Which readings move, and which stay put?</li>
+            <li>Add one earth fault, then the second. Watch the lamps between them.</li>
+            <li>Cut the primary cable and read what the regulator does.</li>
+          </ol>
+        </div>
+        <details class="more">
+          <summary>Model assumptions</summary>
+          <div class="prose">
+            <p>Lamp loads are modelled as fixed resistances reflected through transformers of 85 % efficiency. An open-secondary transformer is modelled as a reactive impedance 2.5 times its loaded value, standing in for the saturated magnetising branch. The earth path between two faults is taken as 8 Ω. Real values depend on the transformer, the soil and the regulator, so treat the numbers as trends, not predictions.</p>
+            <p>Relative intensity per step follows a typical halogen curve: B1 ≈ 0.15 %, B2 ≈ 1.2 %, B3 ≈ 5 %, B4 ≈ 25 %, B5 = 100 %.</p>
+          </div>
+        </details>
+      </article>
+    </section>
+
+    <!-- D · Equipment -->
+    <section class="module" data-module="equipment" data-code="D" hidden>
+      <article class="lesson">
+        <div class="module-head">
+          <h2>The hardware between the switchboard and the lamp</h2>
+          <p class="lede">Each piece of equipment in a series circuit has one job and a known failure mode. Knowing both is what lets you read a fault from the vault.</p>
+        </div>
+        <h3>Constant current regulator (CCR)</h3>
+        <div class="prose">
+          <p>The CCR takes a constant-voltage supply and delivers a constant current to the loop. It measures output current continuously and adjusts output voltage so the current stays at the selected brightness step, typically within about ±0.1 A at 6.6 A. Load changes (a lamp failing, the cable warming up) change the voltage, never the current.</p>
+          <p><strong>Rating.</strong> A CCR's kVA rating is its rated current times its maximum output voltage. A 20 kVA, 6.6 A regulator can drive up to about 3 030 V. If the loop needs more than that, the CCR can no longer hold the current and the lights dim.</p>
+          <p><strong>Measuring output.</strong> Thyristor CCRs produce a chopped waveform at low steps. Measure output current with a true-RMS clamp meter; an average-responding meter will read wrong.</p>
+        </div>
+        <div class="narrow">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Step</th><th class="num">5-step current</th><th class="num">Relative intensity*</th></tr></thead>
+              <tbody>
+                <tr><td>B1</td><td class="num">2.8 A</td><td class="num">≈ 0.15 %</td></tr>
+                <tr><td>B2</td><td class="num">3.4 A</td><td class="num">≈ 1.2 %</td></tr>
+                <tr><td>B3</td><td class="num">4.1 A</td><td class="num">≈ 5 %</td></tr>
+                <tr><td>B4</td><td class="num">5.2 A</td><td class="num">≈ 25 %</td></tr>
+                <tr><td>B5</td><td class="num">6.6 A</td><td class="num">100 %</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small muted">3-step regulators (common on taxiways) use 4.8, 5.5 and 6.6 A. *Intensity for a typical halogen lamp; LED fixtures are driven to their own curve.</p>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>How a CCR works</h3>
+        <p class="lede-small">Inside every CCR the same loop runs: measure the output current, compare it with the step that was asked for, and change the output voltage until they match. Select any block to see what it does and how it fails, then run the regulator on a load of your choice.</p>
+        <div id="ccr-how" class="cd">
+          <div class="controls"><span class="ctl-label">Power stage
+            <span class="seg cd-tech"><button type="button" data-tech="scr" aria-pressed="true">Thyristor</button><button type="button" data-tech="igbt" aria-pressed="false">IGBT / PWM</button></span></span></div>
+          <div class="sld-wrap cd-diagram"></div>
+          <div class="panel cd-info" aria-live="polite"></div>
+          <h4>The regulator at work</h4>
+          <div class="calc-layout">
+            <div class="section">
+              <div class="controls"><span class="ctl-label">Step
+                <span class="seg cd-step"><button type="button" data-step="1">B1</button><button type="button" data-step="2">B2</button><button type="button" data-step="3">B3</button><button type="button" data-step="4">B4</button><button type="button" data-step="5" aria-pressed="true">B5</button></span></span></div>
+              <div class="grid-2">
+                <label class="field">Lights on the circuit: <span class="cd-lamps-v">40</span><input type="range" class="cd-lamps" min="10" max="160" step="2" value="40"></label>
+                <label class="field">CCR rating<select class="cd-kva"></select></label>
+              </div>
+              <div class="panel cd-wave-host"></div>
+            </div>
+            <div class="panel result">
+              <table class="result-table"><tbody class="cd-read"></tbody></table>
+              <p class="cd-note feedback"></p>
+            </div>
+          </div>
+          <p class="small muted">A typical edge light with its isolating transformer presents about 4.6 Ω to the loop at 6.6 A. The grey curve is the full 6.6 A sine for comparison. Ratings and impedances are typical training figures.</p>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>CCR types and protections</h3>
+        <div class="table-wrap">
+          <table class="stack">
+            <thead><tr><th>Technology</th><th>How it regulates</th><th>Strengths</th><th>Watch for</th></tr></thead>
+            <tbody>
+              <tr><td>Thyristor (SCR)</td><td>Phase-controlled thyristors feed an output transformer</td><td>Robust, well understood, widely installed</td><td>Low power factor and high harmonics at low steps; true-RMS metering essential</td></tr>
+              <tr><td>Ferroresonant</td><td>Saturating resonant transformer with capacitors</td><td>Very rugged, tolerant of surges</td><td>Heavy, noisy, sensitive to supply frequency; mostly legacy</td></tr>
+              <tr><td>IGBT / PWM</td><td>Switch-mode inverter synthesises a sinusoidal output</td><td>Near-unity power factor, low harmonics, compact, good with LED loads</td><td>Electronics need clean cooling air; check firmware for monitoring features</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid-3">
+          <div class="panel"><h4>Open-circuit protection</h4><p class="small">If the loop opens, current falls to zero and the CCR would drive full voltage into the break. Protection shuts the output down within a few seconds and latches until reset.</p></div>
+          <div class="panel"><h4>Overcurrent protection</h4><p class="small">Trips if output current exceeds the set step by a set margin, protecting lamps and transformers from a regulation failure.</p></div>
+          <div class="panel"><h4>Insulation monitoring</h4><p class="small">An insulation resistance monitor (IRMS / earth fault monitor) injects a DC test voltage between the loop and earth and reports the insulation resistance continuously.</p></div>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Series isolation transformer</h3>
+        <div class="callout danger">
+          <span class="sign"><span class="mand">HIGH V</span></span>
+          <div>
+            <p><strong>Never open a secondary on a live circuit.</strong> With the lamp removed, the secondary terminals of a saturated transformer carry high peak voltages. Replace lamps only with the circuit isolated, or where your procedures and equipment (for example IEC 62870 secondary circuit safety devices) explicitly allow live lamp changes.</p>
+          </div>
+        </div>
+        <div class="prose">
+          <p>Each fixture has a transformer with its primary in series with the loop and a secondary feeding the lamp. Typical units are 6.6 A / 6.6 A, sized by lamp load: 10/15, 20/25, 30/45, 65, 100, 150, 200 and 300 W are common ratings.</p>
+          <p><strong>Lamp failure.</strong> When the lamp opens, the secondary has no load. The transformer core saturates, the voltage across its primary rises, and the loop stays closed. The CCR sees a small rise in reactive load and keeps the current where it is. Every other lamp stays lit.</p>
+          <p><strong>Sizing.</strong> Pick a rating at or above the lamp wattage. An overloaded transformer cannot deliver full secondary current, so the lamp runs dim. A very oversized one wastes magnetising current.</p>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Cable, connectors and light bases</h3>
+        <div class="prose">
+          <p><strong>Primary cable</strong> is single-core 5 kV class (FAA L-824), commonly 8 AWG (8.4 mm²) or 6 mm² copper, shielded or unshielded according to the design. It runs in duct or direct-buried, looping in and out of each light base.</p>
+          <p><strong>Connectors</strong> (FAA L-823) are moulded plug-and-receptacle kits on the transformer leads and cable ends. Field-attached kits must be made up exactly as specified and sealed with heat-shrink; a badly made connector is the most common source of water ingress and earth faults.</p>
+          <p><strong>Light bases</strong> (cans) house the transformer and connectors. FAA L-867 bases suit elevated lights in non-load-bearing areas; L-868 bases are load-bearing for inset lights in pavement.</p>
+          <p><strong>Lightning protection.</strong> A bare copper counterpoise is laid above the duct or cable and bonded to each light base, so lightning currents travel in the counterpoise rather than through the cable insulation.</p>
+          <p><strong>Records.</strong> Label every cable at every pit and keep an as-built record of circuit routing. Fault finding on an unrecorded circuit takes days instead of hours.</p>
+          <p><strong>LED retrofits.</strong> LED fixtures draw far less power but present a non-linear load. Confirm the CCR is compatible, check its minimum-load requirement, and re-check lamp-failure detection, which relies on load changes that are much smaller with LEDs.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- E · 3D installation details -->
+    <section class="module" data-module="details" data-code="E" hidden>
+      <article class="lesson">
+        <div class="module-head">
+          <h2>Inside a light installation</h2>
+          <p class="lede">Rotate a complete installation, cut it open, then pull it apart. In the exploded view every part has a description bubble; select a part for its full details.</p>
+        </div>
+        <h3>Elevated light on an L-867 base</h3>
+        <div class="d3d" data-model="elevated"></div>
+      </article>
+
+      <article class="lesson">
+        <h3>In-pavement light on an L-868 base</h3>
+        <p class="lede-small">Inset lights carry aircraft wheel loads, so the base is load-bearing and locked into concrete within the pavement. Compare its layers with the elevated installation.</p>
+        <div class="d3d" data-model="inset"></div>
+      </article>
+    </section>
+
+    <!-- F · The vault -->
+    <section class="module" data-module="vault" data-code="F" hidden>
+      <article class="lesson">
+        <div class="module-head">
+          <h2>The vault: where the airfield lighting is powered</h2>
+          <p class="lede">The AGL vault (substation) takes the airport's power supply, keeps it alive through failures, and turns it into the series currents that feed every circuit on the airfield. It is also where most switching, testing and fault finding starts.</p>
+        </div>
+        <h3>Inside the vault</h3>
+        <p class="lede-small">Power flows from top to bottom: two utility feeders, MV switchgear and a transformer, then the transfer switch that brings in the standby generator, the main LV switchboard, and one CCR per field circuit. Critical CCRs can run from a UPS no-break bus.</p>
+        <p class="scroll-hint">Swipe the diagram sideways to see all of it.</p>
+        <div class="sld-wrap" id="vault-sld"></div>
+        <aside class="panel" id="vault-sld-info" aria-live="polite"></aside>
+      </article>
+
+      <article class="lesson">
+        <h3>Mains failure and switch-over</h3>
+        <p class="lede-small">Fail the mains and watch the transfer switch start the generator while the UPS carries the no-break bus. Each circuit's recovery time is checked against the ICAO switch-over time for the operating category. Time runs at twice real speed.</p>
+        <div class="controls">
+          <span class="ctl-label">Operations
+            <span class="seg" id="vault-cat">
+              <button type="button" data-cat="1" aria-pressed="false">CAT I</button>
+              <button type="button" data-cat="3" aria-pressed="true">CAT II/III</button>
+            </span>
+          </span>
+          <button type="button" class="btn" id="vault-nobreak" aria-pressed="true">Critical CCRs on the UPS</button>
+          <span class="ctl-label">Generator ready after <span id="vault-gen-label" class="mono">10 s</span>
+            <input type="range" id="vault-gen" min="5" max="20" step="1" value="10" aria-label="Generator ready after (seconds)">
+          </span>
+          <button type="button" class="btn primary" id="vault-fail">Fail the mains</button>
+        </div>
+        <div id="vault-sim-status" class="alarms" aria-live="polite"></div>
+        <p class="scroll-hint">Swipe the diagram sideways to see all of it.</p>
+        <div class="sld-wrap" id="vault-sim"></div>
+        <div class="table-wrap"><table id="vault-sim-table"></table></div>
+        <div class="panel try">
+          <h4>Try this</h4>
+          <ol>
+            <li>With CAT II/III selected, fail the mains. Which circuits never go dark?</li>
+            <li>Restore, switch off "Critical CCRs on the UPS" and fail the mains again. Which circuits now fail their 1 s requirement?</li>
+            <li>Select CAT I. Does the generator alone meet every requirement?</li>
+            <li>Slide the generator time to 15 s or more. What happens to the 15 s circuits?</li>
+          </ol>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Vault layout</h3>
+        <p class="lede-small">A typical layout separates medium voltage, the generator and the batteries from the CCR hall, and keeps clear, protected working space in front of every regulator and switchboard.</p>
+        <p class="scroll-hint">Swipe the diagram sideways to see all of it.</p>
+        <div class="sld-wrap" id="vault-plan"></div>
+        <div class="d3d-below">
+          <ol class="d3d-parts" id="vault-plan-list"></ol>
+          <aside class="panel" id="vault-plan-info" aria-live="polite"></aside>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>3D vault tour</h3>
+        <p class="lede-small">Walk around a complete vault in 3D. Point at any piece of equipment to see what it is, select it for details, or follow the guided tour from the MV room to the CCR row.</p>
+        <div id="vault-3d"></div>
+      </article>
+
+      <article class="lesson">
+        <h3>Working safely in the vault</h3>
+        <div class="callout danger">
+          <span class="sign"><span class="mand">DANGER</span></span>
+          <div>
+            <p><strong>Many live circuits share one room.</strong> The CCR next to the one you are working on may be running, its output reaches several kilovolts, and the interleaved partner of your circuit may pass through the same light bases. Isolate what you will touch, prove it dead, and treat everything else as live.</p>
+          </div>
+        </div>
+        <ol class="prose steps">
+          <li>Agree the work with air traffic control or operations, and confirm which circuits will be dark and for how long.</li>
+          <li>Switch the circuit to local control at the vault, so the tower or ALCMS cannot switch it on.</li>
+          <li>Switch the CCR off, open its input breaker on the LV switchboard, and fit your personal lock and tag.</li>
+          <li>Open the series cutout and prove the field side dead with a suitably rated detector.</li>
+          <li>For interleaved circuits, identify the partner circuit. Isolate it too if your work touches shared light bases or trenches.</li>
+          <li>Stand on the insulating mat, wear insulated gloves rated for the voltage, and wear arc-rated clothing for switchboard work as the arc-flash study requires.</li>
+          <li>To restore: remove locks, close the cutout, run the CCR through every step and check the current, return to remote control and confirm with the tower.</li>
+        </ol>
+        <h4>Routine checks in the vault</h4>
+        <div class="table-wrap">
+          <table class="stack">
+            <thead><tr><th>Typical interval</th><th>Check</th></tr></thead>
+            <tbody>
+              <tr><td>Daily</td><td>Alarm panel, CCR status lamps, room temperature, UPS status</td></tr>
+              <tr><td>Weekly</td><td>Generator start test; CCR output current at each step; insulation monitor readings</td></tr>
+              <tr><td>Monthly</td><td>Generator on-load test and transfer switch test, coordinated with operations; UPS battery check</td></tr>
+              <tr><td>Annually</td><td>Thermal imaging of switchboards and CCR terminals; CCR internal inspection; earth resistance and bonding tests</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">Intervals are examples. Use the maintenance programme your authority and the equipment manufacturers require.</p>
+      </article>
+    </section>
+
+    <!-- G · Design -->
+    <section class="module" data-module="design" data-code="G" hidden>
+      <article class="lesson">
+        <div class="module-head">
+          <h2>From operating category to circuit schedule</h2>
+          <p class="lede">The operating category the runway must support sets the lighting systems, their serviceability levels and how fast they must recover from a power failure. Circuit design follows from that.</p>
+        </div>
+        <h3>Design sequence</h3>
+        <ol class="prose steps">
+          <li><strong>Operational requirement.</strong> Runway type, approach category (non-precision, CAT I, II, III), lowest RVR, low-visibility taxi routes, and which rule set applies (ICAO, EASA, FAA or national).</li>
+          <li><strong>Lighting systems.</strong> Choose systems and patterns: approach lighting, PAPI, edge, threshold, end, centreline, TDZ, taxiway centreline or edge, stop bars, runway guard lights, signs.</li>
+          <li><strong>Fixtures.</strong> Select certified fixtures for each position and photometric class. Record wattage and transformer rating for each.</li>
+          <li><strong>Circuits.</strong> Group fixtures into circuits by switching need and integrity. Interleave critical systems. Check every circuit's load and voltage against the CCR rating and cable class.</li>
+          <li><strong>Power supply.</strong> Size the AGL substation and secondary power so each system meets its switch-over time.</li>
+          <li><strong>Control and monitoring.</strong> Specify the airfield lighting control and monitoring system (ALCMS), including individual lamp monitoring where serviceability rules demand it.</li>
+        </ol>
+      </article>
+
+      <article class="lesson">
+        <h3>Circuit design rules of thumb</h3>
+        <div class="grid-2">
+          <div class="panel">
+            <h4>Interleave critical systems</h4>
+            <p class="small">Feed alternate lights of the approach, runway edge, centreline and TDZ from two circuits on separate CCRs. If one circuit fails, the pattern stays uniform at half density instead of showing a dark gap. Try <a href="#lights">Lose circuit A</a> on the map.</p>
+          </div>
+          <div class="panel">
+            <h4>One CCR per switching function</h4>
+            <p class="small">Lights that must be switched or set to a brightness step together share a circuit. Systems switched independently (each stop bar, each taxi route segment) need their own circuit or addressable switching on the circuit.</p>
+          </div>
+          <div class="panel">
+            <h4>Keep within voltage and load</h4>
+            <p class="small">Load the CCR to roughly 60 to 90 % of rating, leaving room for extensions without running it so lightly that power factor suffers. Keep the step-5 output voltage within the cable's voltage class.</p>
+          </div>
+          <div class="panel">
+            <h4>Route for fault finding</h4>
+            <p class="small">Bring circuits back to accessible pits so they can be split in half for sectionalising. Avoid running both interleaved circuits through the same duct where one dig-in could cut both.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Secondary power switch-over times</h3>
+        <p class="small muted">Maximum time for the light to return after primary power fails. Summarised from ICAO Annex 14, Vol I, Table 8-1; check the current edition.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Runway</th><th>Lighting aid</th><th class="num">Switch-over</th></tr></thead>
+            <tbody>
+              <tr><td>Non-instrument / non-precision</td><td>Approach, runway edge, threshold, end, obstacle lights</td><td class="num">15 s</td></tr>
+              <tr><td>Precision CAT I</td><td>Approach, runway edge, PAPI, threshold, end, essential taxiway, obstacle</td><td class="num">15 s</td></tr>
+              <tr><td rowspan="4">Precision CAT II/III</td><td>Inner 300 m of approach lighting</td><td class="num">1 s</td></tr>
+              <tr><td>Runway centreline, TDZ, threshold, end, all stop bars</td><td class="num">1 s</td></tr>
+              <tr><td>Other approach lighting, runway edge</td><td class="num">15 s</td></tr>
+              <tr><td>Essential taxiway, obstacle lights</td><td class="num">15 s</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">A 1 s switch-over is normally met with a no-break supply (UPS or a continuously running source) or by running the critical CCRs from secondary power during low-visibility operations, since a standby generator start takes longer.</p>
+      </article>
+
+      <article class="lesson">
+        <h3>Serviceability objectives (CAT II/III)</h3>
+        <p class="small muted">Minimum percentage of lights that must be serviceable, summarised from ICAO Annex 14 Ch. 10. A light is unserviceable when its average intensity falls below 50 % of specification.</p>
+        <div class="table-wrap narrow">
+          <table>
+            <thead><tr><th>System</th><th class="num">Serviceable</th></tr></thead>
+            <tbody>
+              <tr><td>Approach lighting, inner 450 m</td><td class="num">95 %</td></tr>
+              <tr><td>Runway centreline, threshold, runway edge</td><td class="num">95 %</td></tr>
+              <tr><td>Touchdown zone</td><td class="num">90 %</td></tr>
+              <tr><td>Approach lighting beyond 450 m</td><td class="num">85 %</td></tr>
+              <tr><td>Runway end</td><td class="num">75 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">There must also be no two adjacent unserviceable lights in most of these systems. This is why CAT II/III installations use individual lamp monitoring: a CCR alone can count failed lamps but cannot tell you whether two of them are next to each other.</p>
+      </article>
+    </section>
+
+    <!-- H · Calculators -->
+    <section class="module" data-module="calc" data-code="H" hidden>
+      <article class="lesson">
+        <div class="module-head">
+          <h2>Size the regulator, track the insulation</h2>
+          <p class="lede">Each calculator opens with an example circuit so you can see how it works. Replace the values with your own.</p>
+        </div>
+        <h3>CCR load and sizing</h3>
+        <div class="calc-layout">
+          <div class="section">
+            <h4>Fixtures on the circuit</h4>
+            <div class="calc-rows" id="calc-rows"></div>
+            <div class="controls"><button type="button" class="btn" id="calc-add">Add fixture group</button></div>
+            <h4>Cable and margins</h4>
+            <div class="grid-2">
+              <label class="field">Loop cable length (m)<input type="number" inputmode="decimal" id="c-len" min="0" step="10" value="6200"></label>
+              <label class="field">Conductor
+                <select id="c-cond">
+                  <option value="3.08">6 mm² Cu (3.08 Ω/km)</option>
+                  <option value="2.06" selected>8 AWG Cu (2.06 Ω/km)</option>
+                  <option value="1.83">10 mm² Cu (1.83 Ω/km)</option>
+                </select>
+              </label>
+              <label class="field">Ground temperature (°C)<input type="number" inputmode="decimal" id="c-temp" step="1" value="30"></label>
+              <label class="field">Load power factor<input type="number" inputmode="decimal" id="c-pf" min="0.5" max="1" step="0.01" value="0.9"></label>
+              <label class="field">Spare capacity (%)<input type="number" inputmode="decimal" id="c-spare" min="0" max="100" step="5" value="20"></label>
+            </div>
+          </div>
+          <div class="panel result">
+            <span class="tag">Recommended regulator</span>
+            <div class="result-big num" id="c-size">–</div>
+            <div class="small muted" id="c-size-note"></div>
+            <table class="result-table"><tbody id="c-results"></tbody></table>
+            <ul class="note-list" id="c-notes"></ul>
+          </div>
+        </div>
+        <p class="small muted">Transformer efficiency defaults by rating are typical figures. Use the manufacturer's data sheet values for a real design, and confirm the regulator's own sizing method.</p>
+      </article>
+
+      <article class="lesson">
+        <h3>Insulation resistance trend</h3>
+        <p class="lede-small">Record circuit-to-earth insulation resistance from your periodic megger tests. The trend matters more than any one reading: a steady fall points to a failing connector or cable long before it causes an outage.</p>
+        <div class="panel">
+          <span class="tag" id="ir-title">Example circuit: taxiway A edge</span>
+          <div class="chart" id="ir-chart"></div>
+          <p class="small muted">Bands are example thresholds for a 5 kV circuit tested at its specified DC voltage. Use the acceptance and alarm values your authority or IEC 61821 maintenance plan sets.</p>
+        </div>
+        <div class="grid-2 entry">
+          <label class="field">Test date<input type="date" id="ir-date"></label>
+          <label class="field">Reading (MΩ)<input type="number" inputmode="decimal" id="ir-val" min="0" step="0.1"></label>
+        </div>
+        <div class="controls"><button type="button" class="btn primary" id="ir-add">Add reading</button><button type="button" class="btn" id="ir-sample">Load example readings</button></div>
+        <div class="table-wrap narrow">
+          <table>
+            <thead><tr><th>Date</th><th class="num">MΩ</th><th>Condition</th><th></th></tr></thead>
+            <tbody id="ir-rows"></tbody>
+          </table>
+        </div>
+        <div class="controls"><button type="button" class="btn" id="ir-more" hidden></button></div>
+      </article>
+
+      <article class="lesson">
+        <h3>Loop resistance check</h3>
+        <div class="calc-layout">
+          <div class="grid-2">
+            <label class="field">Loop cable length (m)<input type="number" inputmode="decimal" id="lr-len" min="0" step="10" value="6200"></label>
+            <label class="field">Conductor
+              <select id="lr-cond">
+                <option value="3.08">6 mm² Cu (3.08 Ω/km)</option>
+                <option value="2.06" selected>8 AWG Cu (2.06 Ω/km)</option>
+                <option value="1.83">10 mm² Cu (1.83 Ω/km)</option>
+              </select>
+            </label>
+            <label class="field">Number of transformers<input type="number" inputmode="decimal" id="lr-n" min="0" step="1" value="58"></label>
+            <label class="field">Primary winding resistance each (Ω)<input type="number" inputmode="decimal" id="lr-w" min="0" step="0.01" value="0.25"></label>
+            <label class="field">Cable temperature (°C)<input type="number" inputmode="decimal" id="lr-t" step="1" value="20"></label>
+            <label class="field">Measured loop resistance (Ω)<input type="number" inputmode="decimal" id="lr-m" min="0" step="0.1" value="31.5"></label>
+          </div>
+          <div class="panel result">
+            <span class="tag">Measured vs expected</span>
+            <div class="result-big num" id="lr-dev">–</div>
+            <p id="lr-text"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Lights on a curve</h3>
+        <p class="lede-small">Work out how many lights a taxiway curve needs and where each one goes. Enter the radius and the angle the curve turns through; the maximum spacing comes from the radius rule or from your own standard.</p>
+        <div class="calc-layout">
+          <div class="grid-2">
+            <label class="field">Curve radius to the centreline (m)<input type="number" inputmode="decimal" id="cv-r" min="1" step="1" value="60"></label>
+            <label class="field">Angle the curve turns through (°)<input type="number" inputmode="decimal" id="cv-a" min="1" max="180" step="1" value="90"></label>
+            <label class="field">Lights to place
+              <select id="cv-on">
+                <option value="cl" selected>Centreline</option>
+                <option value="edges">Both edges</option>
+                <option value="all">Centreline and both edges</option>
+              </select>
+            </label>
+            <label class="field">Taxiway width (m)<input type="number" inputmode="decimal" id="cv-w" min="0" step="0.5" value="23"></label>
+            <label class="field">Spacing rule
+              <select id="cv-rule">
+                <option value="vis" selected>Centreline table, RVR 350 m or more</option>
+                <option value="low">Centreline table, RVR below 350 m</option>
+                <option value="own">My own maximum spacing</option>
+              </select>
+            </label>
+            <label class="field">Maximum spacing (m)<input type="number" inputmode="decimal" id="cv-s" min="1" step="0.5" value="15"></label>
+          </div>
+          <div class="panel result">
+            <span class="tag">Lights on the curve</span>
+            <div class="result-big num" id="cv-total">–</div>
+            <div class="small muted" id="cv-total-note"></div>
+            <table class="result-table"><tbody id="cv-results"></tbody></table>
+          </div>
+        </div>
+        <div class="panel cv-draw" id="cv-draw"></div>
+        <h4>Setting-out table</h4>
+        <div class="controls"><label class="field inline">Line<select id="cv-line"></select></label></div>
+        <div class="table-wrap">
+          <table class="cv-table">
+            <thead><tr><th>Light</th><th class="num">Arc from TP (m)</th><th class="num">Chord from TP (m)</th><th class="num">Deflection from tangent (°)</th><th class="num">Along tangent X (m)</th><th class="num">Offset Y (m)</th></tr></thead>
+            <tbody id="cv-rows"></tbody>
+          </table>
+        </div>
+        <p class="small muted">Lights are spaced equally along the arc, from tangent point (TP) to tangent point, and the lights at both tangent points are counted. Set out each light from the first TP with the deflection angle and chord, or with X along the tangent and Y square to it. The centreline table gives the maximum spacing by radius (radius up to 400 m: 7.5 m, up to 900 m: 15 m, larger: 30 m; below RVR 350 m: 7.5 m under 150 m radius, otherwise 15 m). Edge lights on curves have their own spacing in your standard: choose “My own maximum spacing” for them.</p>
+      </article>
+    </section>
+
+    <!-- J · Maintenance -->
+    <section class="module" data-module="maint" data-code="J" hidden>
+      <article class="lesson">
+        <div class="module-head">
+          <h2>Isolate, test, split, repair, prove</h2>
+          <p class="lede">Most AGL faults are water, damaged connectors or failed lamps. The skill is finding which pit, quickly and safely, on a circuit that may be several kilometres long.</p>
+        </div>
+        <h3>Safe isolation of a series circuit</h3>
+        <ol class="prose steps">
+          <li>Get the circuit released by air traffic control or the operations authority. Agree how the area is protected while it is dark.</li>
+          <li>Set the CCR to off and switch it to local control, so the ALCMS cannot turn it back on.</li>
+          <li>Open the CCR input supply and lock it out. Open the series cutout or output disconnect between the CCR and the field circuit.</li>
+          <li>Apply your personal lock and tag to both. Prove the output dead with a suitably rated detector, testing the detector before and after.</li>
+          <li>After any insulation test, discharge the cable to earth: a few kilometres of cable holds a charge that can bite.</li>
+          <li>Before re-energising: remove earths, run an insulation test, confirm all personnel are clear of the field circuit, then restore in reverse order.</li>
+        </ol>
+      </article>
+
+      <article class="lesson">
+        <h3>Fault-finding scenarios</h3>
+        <p class="lede-small">Work through each scenario. Choose the next step; the feedback explains why it is right or wrong.</p>
+        <div class="scenario-pick" id="ts-pick"></div>
+        <div class="panel step-card" id="ts-card"></div>
+      </article>
+
+      <article class="lesson">
+        <h3>Find the short</h3>
+        <p class="lede-small">A runway edge circuit has a short to earth somewhere along its loop. Make it safe, clip the insulation tester on, split the loop at the light bases and test each piece until you find the short. Every action costs the time it would take on the airfield.</p>
+        <details class="more">
+          <summary>How to play</summary>
+          <div class="prose">
+            <ol>
+              <li>In the vault, click the CCR input breaker to switch it off and lock it out, then pull the series cutout plug to expose the field OUT and RET terminals.</li>
+              <li>Drag the red LINE clip onto a conductor and the black EARTH clip onto earth. Pick a test voltage on the dial and press TEST. The reading climbs while the cable charges; press TEST again to stop when it has settled.</li>
+              <li>Click a base on the map to walk there, click the base plate to open it and click a connector to unplug it. The loop is now split: clip onto the cable side or the transformer side and test each one.</li>
+              <li>Only the piece that contains the short reads low. Keep splitting it until you know exactly which cable, connector or transformer has failed, then use its Replace or Dig up chip.</li>
+              <li>Plug everything back in and prove the whole loop from the vault to finish.</li>
+              <li>Difficulty: Easy has one fault that shows at any test voltage. Medium may hide it as a dry crack that only breaks down at 2500 V or more. Hard has two to five faults, sometimes more than one in the same base, so a section can still read low after you fix one.</li>
+            </ol>
+            <p>Tip: hold a test for a full minute to get the polarization index. Healthy insulation keeps rising (PI about 2); a wet fault stays flat. Some faults are dry cracks that only show at 2500 V or more. When you open a base, look before you test: a burnt, tracked connector boot or a scorched, swollen transformer gives the fault away. Old tape, rust and mud look bad but are usually harmless, and a buried cable fault cannot be seen at all.</p>
+          </div>
+        </details>
+        <div id="fg" class="fg-game" data-mode="short">
+          <div class="controls">
+            <span class="ctl-label">Circuit size
+              <span class="seg fg-level" id="fg-level">
+                <button type="button" data-level="easy" aria-pressed="false">12 bases</button>
+                <button type="button" data-level="normal" aria-pressed="true">24 bases</button>
+                <button type="button" data-level="hard" aria-pressed="false">40 bases</button>
+              </span>
+            </span>
+            <span class="ctl-label">Difficulty
+              <span class="seg fg-diff" id="fg-diff">
+                <button type="button" data-diff="easy" aria-pressed="false">Easy</button>
+                <button type="button" data-diff="medium" aria-pressed="true">Medium</button>
+                <button type="button" data-diff="hard" aria-pressed="false">Hard</button>
+              </span>
+            </span>
+            <button type="button" class="btn fg-new" id="fg-new">New fault</button>
+          </div>
+          <div class="readouts fg-stats"></div>
+          <p class="scroll-hint">Swipe the diagram sideways to see all of it.</p>
+          <div class="feedback fg-msg info" aria-live="polite"></div>
+          <div class="sld-wrap fg-map"></div>
+          <div class="panel"><h4>Event log</h4><ol class="fg-log"></ol></div>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Find the open circuit</h3>
+        <p class="lede-small">The CCR on a runway edge circuit trips on open circuit and every light is out: the loop is broken somewhere. Make it safe, bond one end of the loop to earth with an earthing jumper, then work along the circuit with the tester on its continuity range until you find the break.</p>
+        <details class="more">
+          <summary>How to play</summary>
+          <div class="prose">
+            <ol>
+              <li>In the vault, switch off and lock out the CCR and pull the series cutout plug. Set the tester to Ω and measure from field OUT to field RET: OL confirms the loop is open.</li>
+              <li>Drag an earthing jumper from the tray onto field OUT. That end of the loop is now bonded to earth, and the jumper stays there when you walk away.</li>
+              <li>At a base, open it, unplug a connector and measure from the cable side to the can earth. A low reading means the conductor is unbroken all the way back to the jumper; OL means the break is between here and the vault.</li>
+              <li>Plug the connector back in before you move on, or the next reading will stop at that split. Keep halving the circuit until you know which cable, connector or transformer is open. To test a transformer directly, unplug both sides and measure across its two leads.</li>
+              <li>Repair it, plug everything back in, take off every jumper and prove the loop from OUT to RET.</li>
+            </ol>
+            <p>Difficulty: on Easy a broken part inside a base can be seen when you open it. On Medium about half cannot: a burnt-open contact only shows when the connector is unplugged, and a burnt-open winding only shows on the meter. Hard has two or three breaks: from one jumper you can only see as far as the first one, so move the jumper or use a second one from the RET side.</p>
+          </div>
+        </details>
+        <div id="fo" class="fg-game" data-mode="open">
+          <div class="controls">
+            <span class="ctl-label">Circuit size
+              <span class="seg fg-level">
+                <button type="button" data-level="easy" aria-pressed="false">12 bases</button>
+                <button type="button" data-level="normal" aria-pressed="true">24 bases</button>
+                <button type="button" data-level="hard" aria-pressed="false">40 bases</button>
+              </span>
+            </span>
+            <span class="ctl-label">Difficulty
+              <span class="seg fg-diff">
+                <button type="button" data-diff="easy" aria-pressed="false">Easy</button>
+                <button type="button" data-diff="medium" aria-pressed="true">Medium</button>
+                <button type="button" data-diff="hard" aria-pressed="false">Hard</button>
+              </span>
+            </span>
+            <button type="button" class="btn fg-new">New fault</button>
+          </div>
+          <div class="readouts fg-stats"></div>
+          <p class="scroll-hint">Swipe the diagram sideways to see all of it.</p>
+          <div class="feedback fg-msg info" aria-live="polite"></div>
+          <div class="sld-wrap fg-map"></div>
+          <div class="panel"><h4>Event log</h4><ol class="fg-log"></ol></div>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Lighting fault simulator</h3>
+        <p class="lede-small">The runway edge lighting is live: every light on the map shows whether it is on. Read the pattern of dark lights and the CCR's alarms, then find and fix every fault, from a burnt-out lamp to the CCR itself, and put the lighting back in service.</p>
+        <details class="more">
+          <summary>How to play</summary>
+          <div class="prose">
+            <ol>
+              <li>Read the map first. One light out points at that light: lamp, fitting, secondary connector or transformer. Every light on a circuit out points at the CCR or the loop. Every other light out on an interleaved edge is one whole circuit.</li>
+              <li>In the vault, the CCR shows its step, current and alarms. Clamp the meter on its output to read the true current: a CCR out of calibration still displays 6.6 A. A dark display means no control power: check the control fuse.</li>
+              <li>To test the CCR itself, lock it out, pull the cutout plug (the CCR side is then shorted) and switch it on. A healthy CCR regulates into the short; one that still trips on open circuit has a faulty control board.</li>
+              <li>At a light, change the lamp or the fitting from above. Open the base to unplug the secondary connector and measure each side on the continuity range: the lamp side reads about 1.4 Ω, the transformer secondary about 0.3 Ω. Far less means shorted turns.</li>
+              <li>A single short to earth leaves every light on and only raises the earth fault alarm, because the series loop floats. Two shorts to earth make a path through the ground: the lights between them go dark, while the rest stay on. Find both with the insulation tester.</li>
+              <li>Interleaved circuits may be fed from two vaults, one at each end of the runway. Where a vault has a standby CCR, lock out and use the changeover switch to put a circuit on the standby: the lighting comes back at once and the duty CCR can be repaired out of circuit.</li>
+              <li>Lock out before any work and remake every joint and remove every jumper before you switch on again. The job is done when every light is on and every alarm is clear.</li>
+            </ol>
+          </div>
+        </details>
+        <div id="fs" class="fg-game" data-mode="sim">
+          <div class="controls">
+            <span class="ctl-label">Scenario
+              <span class="seg fg-scen">
+                <button type="button" data-scen="fixtures" aria-pressed="true">Light fittings</button>
+                <button type="button" data-scen="ccr" aria-pressed="false">CCR</button>
+                <button type="button" data-scen="earth" aria-pressed="false">Earth faults</button>
+                <button type="button" data-scen="interleaved" aria-pressed="false">Interleaved circuits</button>
+                <button type="button" data-scen="mixed" aria-pressed="false">Mixed</button>
+              </span>
+            </span>
+            <span class="ctl-label">Circuit size
+              <span class="seg fg-level">
+                <button type="button" data-level="easy" aria-pressed="false">12 lights</button>
+                <button type="button" data-level="normal" aria-pressed="true">24 lights</button>
+                <button type="button" data-level="hard" aria-pressed="false">40 lights</button>
+              </span>
+            </span>
+            <span class="ctl-label">Difficulty
+              <span class="seg fg-diff">
+                <button type="button" data-diff="easy" aria-pressed="false">Easy</button>
+                <button type="button" data-diff="medium" aria-pressed="true">Medium</button>
+                <button type="button" data-diff="hard" aria-pressed="false">Hard</button>
+              </span>
+            </span>
+            <button type="button" class="btn fg-new">New fault</button>
+          </div>
+          <div class="readouts fg-stats"></div>
+          <p class="scroll-hint">Swipe the diagram sideways to see all of it.</p>
+          <div class="feedback fg-msg info" aria-live="polite"></div>
+          <div class="sld-wrap fg-map"></div>
+          <div class="panel"><h4>Event log</h4><ol class="fg-log"></ol></div>
+        </div>
+      </article>
+
+      <article class="lesson">
+        <h3>Preventive maintenance at a glance</h3>
+        <div class="table-wrap">
+          <table class="stack">
+            <thead><tr><th>Typical interval</th><th>Task</th></tr></thead>
+            <tbody>
+              <tr><td>Daily</td><td>Lights-out inspection drive, ALCMS alarm review, CCR operation at all steps</td></tr>
+              <tr><td>Weekly</td><td>Check output current at each step with a true-RMS meter; check PAPI and signs</td></tr>
+              <tr><td>Monthly</td><td>Insulation resistance test of each circuit; record and trend the results</td></tr>
+              <tr><td>Quarterly to semi-annual</td><td>Photometric measurement of inset lights; clean prisms and lenses; check PAPI aiming</td></tr>
+              <tr><td>Annually</td><td>Inspect light bases for water and corrosion; check torque on inset fixture bolts; CCR internal inspection</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">Intervals are examples. Set your own from the maintenance programme your authority requires (ICAO Annex 14 Ch. 10, FAA AC 150/5340-26, IEC 61821).</p>
+      </article>
+    </section>
+
+    <!-- K · Quiz -->
+    <section class="module" data-module="quiz" data-code="K" hidden>
+      <article class="lesson" data-title="Quiz">
+        <div class="module-head">
+          <h2>Test what you know</h2>
+          <p class="lede">Questions are tagged by audience. Each answer comes with an explanation, so a wrong answer still teaches something.</p>
+        </div>
+        <div class="controls">
+          <span class="ctl-label">Questions for
+            <span class="seg" id="quiz-filter">
+              <button type="button" data-aud="all" aria-pressed="true">Everyone</button>
+              <button type="button" data-aud="elec" aria-pressed="false">Electrician</button>
+              <button type="button" data-aud="eng" aria-pressed="false">Engineer</button>
+              <button type="button" data-aud="des" aria-pressed="false">Designer</button>
+            </span>
+          </span>
+          <span class="small muted" id="quiz-best"></span>
+        </div>
+        <div class="panel step-card quiz-card" id="quiz-card"></div>
+      </article>
+    </section>
+
+    <!-- L · Glossary -->
+    <section class="module" data-module="glossary" data-code="L" hidden>
+      <article class="lesson" data-title="Terms A–Z">
+        <div class="module-head">
+          <h2>Terms of the trade</h2>
+        </div>
+        <label class="field search">Search terms<input type="search" id="gloss-q" placeholder="e.g. CCR, barrette, counterpoise"></label>
+        <dl class="gloss" id="gloss-list"></dl>
+      </article>
+    </section>
+
+    <!-- M · Reference -->
+    <section class="module" data-module="reference" data-code="M" hidden>
+      <article class="lesson">
+        <div class="module-head">
+          <h2>Tables to look things up</h2>
+          <p class="lede">Lookup tables used across the course. Values are typical; check the current edition of each standard.</p>
+        </div>
+        <h3>Standards you will meet</h3>
+        <div class="table-wrap">
+          <table class="stack">
+            <thead><tr><th>Document</th><th>Covers</th></tr></thead>
+            <tbody>
+              <tr><td>ICAO Annex 14, Vol I, Ch. 5, 8, 10</td><td>Visual aids (colours, spacing, patterns), electrical systems (secondary power, switch-over times), maintenance and serviceability</td></tr>
+              <tr><td>ICAO Doc 9157, Aerodrome Design Manual, Parts 4 and 5</td><td>Guidance on visual aids and on electrical system design</td></tr>
+              <tr><td>EASA CS-ADR-DSN</td><td>European certification specifications for aerodrome design, including lighting</td></tr>
+              <tr><td>FAA AC 150/5340-30</td><td>Design and installation details for airport visual aids</td></tr>
+              <tr><td>FAA AC 150/5340-26</td><td>Maintenance of airport visual aid facilities</td></tr>
+              <tr><td>FAA AC 150/5345-10 / -47 / -7 / -26 / -42</td><td>Equipment specifications: CCRs (L-828/L-829), isolation transformers (L-830), cable (L-824), connectors (L-823), light bases (L-867/L-868)</td></tr>
+              <tr><td>IEC 61820, 61821, 61822, 61823, 62870</td><td>Series circuit installation, maintenance, CCRs, series transformers, and safety of secondary circuits</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">Numerical values in this course are typical figures for training. Always design and maintain to the current edition of the standard your authority applies.</p>
+      </article>
+
+      <article class="lesson">
+        <h3>Colours and spacing at a glance</h3>
+        <div class="table-wrap">
+          <table class="stack">
+            <thead><tr><th>System</th><th>Colour</th><th>Typical spacing</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Approach (precision)</td><td><span class="swatch" style="background:var(--l-white)"></span>White; red side rows CAT II/III</td><td>Barrettes every 30 m over 900 m</td><td>Crossbar at 300 m; extra crossbar at 150 m for CAT II/III</td></tr>
+              <tr><td>Threshold</td><td><span class="swatch" style="background:var(--l-green)"></span>Green</td><td>≤ 3 m across the runway</td><td>Unidirectional toward the approach</td></tr>
+              <tr><td>Runway edge</td><td><span class="swatch" style="background:var(--l-white)"></span>White; <span class="swatch" style="background:var(--l-yellow)"></span>yellow last 600 m</td><td>≤ 60 m (instrument runway)</td><td>Yellow caution zone on instrument runways</td></tr>
+              <tr><td>Runway centreline</td><td>White; red/white 900–300 m from end; red last 300 m</td><td>15 m (30 m permitted in some CAT I cases)</td><td>Inset; required for CAT II/III</td></tr>
+              <tr><td>Touchdown zone</td><td><span class="swatch" style="background:var(--l-white)"></span>White barrettes</td><td>30 m or 60 m, over the first 900 m</td><td>CAT II/III</td></tr>
+              <tr><td>Runway end</td><td><span class="swatch" style="background:var(--l-red)"></span>Red</td><td>At least six lights</td><td>Unidirectional toward the runway</td></tr>
+              <tr><td>Taxiway centreline</td><td><span class="swatch" style="background:var(--l-green)"></span>Green; green/yellow near runway</td><td>≤ 15 m straight (low visibility)</td><td>Alternating green/yellow inside the ILS sensitive area or runway strip</td></tr>
+              <tr><td>Taxiway edge</td><td><span class="swatch" style="background:var(--l-blue)"></span>Blue</td><td>≤ 60 m straight, closer on curves</td><td>Omnidirectional</td></tr>
+              <tr><td>Stop bar</td><td><span class="swatch" style="background:var(--l-red)"></span>Red</td><td>3 m across the taxiway</td><td>Required where RVR &lt; 550 m operations are conducted</td></tr>
+              <tr><td>Runway guard lights</td><td><span class="swatch" style="background:var(--l-yellow)"></span>Flashing yellow</td><td>Pair each side (Config A)</td><td>Alternate flashing, 30–60 flashes per minute</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="lesson">
+        <h3>Troubleshooting flowcharts</h3>
+        <p class="lede-small">Pick the part of the system and the symptom. Work down the checks: an answer that leaves the line sends you to a fix or to another chart, the other answer takes you to the next check. Lock out before any work on a circuit.</p>
+        <div id="flows"></div>
+      </article>
+    </section>
+
+    <p class="foot">AGL Field Course is training material. Figures are typical values for learning purposes. Design, install and maintain airfield lighting to the current edition of the standards your aviation authority applies and to the equipment manufacturers' instructions.</p>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="js/data.js?v=20261110"></script>
+<script src="js/detail-data.js?v=20261110"></script>
+<script src="js/vault-data.js?v=20261110"></script>
+<script src="js/he.js?v=20261110"></script>
+<script src="js/he-static.js?v=20261110"></script>
+<script src="js/i18n.js?v=20261110"></script>
+<script src="js/airfield.js?v=20261110"></script>
+<script src="js/circuit.js?v=20261110"></script>
+<script src="js/calc.js?v=20261110"></script>
+<script src="js/learn.js?v=20261110"></script>
+<script src="js/detail3d.js?v=20261110"></script>
+<script src="js/vault.js?v=20261110"></script>
+<script src="js/vault3d.js?v=20261110"></script>
+<script src="js/faultgame.js?v=20261110"></script>
+<script src="js/flows.js?v=20261110"></script>
+<script src="js/ccr.js?v=20261110"></script>
+<script src="js/app.js?v=20261110"></script>
+</body>
+</html>

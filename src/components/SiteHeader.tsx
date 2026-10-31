@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import { currentUser } from '@/lib/auth';
 
-export function SiteHeader({ current = 'labs' }: { current?: string }) {
+export async function SiteHeader({ current = 'labs' }: { current?: string }) {
+  const user = await currentUser();
+
   const items = [
     { key: 'labs', href: '/labs', label: 'מעבדות' },
     { key: 'courses', href: '/courses', label: 'קורסים' },
@@ -26,12 +29,23 @@ export function SiteHeader({ current = 'labs' }: { current?: string }) {
             ))}
           </nav>
           <div className="bar-cta">
-            <Link className="ghost" href="/login">
-              כניסה
+            <Link className="lang" href="/en" hrefLang="en" aria-label="English">
+              EN
             </Link>
-            <Link className="btn" href="/register">
-              ניסיון 7 ימים
-            </Link>
+            {user ? (
+              <Link className="btn" href="/dashboard">
+                האזור שלי
+              </Link>
+            ) : (
+              <>
+                <Link className="ghost" href="/login">
+                  כניסה
+                </Link>
+                <Link className="btn" href="/register">
+                  ניסיון 7 ימים
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </header>

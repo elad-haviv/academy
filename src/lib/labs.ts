@@ -20,6 +20,12 @@ export type Lab = {
   prerequisites: string[];
   minutes: number;
   position: number;
+  /** English shell fields — the training content itself stays Hebrew. */
+  titleEn?: string;
+  subtitleEn?: string;
+  outcomesEn?: string[];
+  failureModesEn?: string[];
+  prerequisitesEn?: string[];
 };
 
 const LABS_DIR = path.join(process.cwd(), 'content', 'labs');

@@ -10,15 +10,46 @@
   "correctnessOwner": "Elad Haviv",
   "validatedOn": "2026-09-14",
   "cover": "/img/cover-agl.png",
-  "learnerRoles": ["חשמלאי שדה", "טכנאי תחזוקת מסלולים", "מכונאי מערכות תאורה"],
-  "buyerRoles": ["מחלקת תחזוקה בנמל תעופה", "קבלן חשמל", "מכללה מקצועית"],
+  "learnerRoles": [
+    "חשמלאי שדה",
+    "טכנאי תחזוקת מסלולים",
+    "מכונאי מערכות תאורה"
+  ],
+  "buyerRoles": [
+    "מחלקת תחזוקה בנמל תעופה",
+    "קבלן חשמל",
+    "מכללה מקצועית"
+  ],
   "outcomes": [
     "איתור קצר מול הארקה במעגל סדרתי",
     "החלפת שנאי זרם ללא כיבוי המסלול",
     "קריאת מדידות תחת עומס וזיהוי קטע חשוד"
   ],
-  "failureModes": ["ניתוק יתר שמחשיך שני קטעים", "החלפת שנאי תחת עומס שגוי", "פירוש שגוי של נפילת מתח"],
-  "prerequisites": ["חשמל בסיסי", "היכרות עם מעגל סדרתי"],
+  "failureModes": [
+    "ניתוק יתר שמחשיך שני קטעים",
+    "החלפת שנאי תחת עומס שגוי",
+    "פירוש שגוי של נפילת מתח"
+  ],
+  "prerequisites": [
+    "חשמל בסיסי",
+    "היכרות עם מעגל סדרתי"
+  ],
   "minutes": 90,
-  "position": 1
+  "position": 1,
+  "titleEn": "AGL Field Course",
+  "subtitleEn": "Airfield lighting: locating a short and an open transformer on a live series circuit.",
+  "outcomesEn": [
+    "Find a short to earth on a series circuit",
+    "Swap a transformer without darkening the circuit",
+    "Read measurements under load and spot the suspect section"
+  ],
+  "failureModesEn": [
+    "Over-isolating and darkening two sections",
+    "Swapping a transformer under the wrong load",
+    "Misreading a voltage drop"
+  ],
+  "prerequisitesEn": [
+    "Basic electrical theory",
+    "Series circuits"
+  ]
 }
