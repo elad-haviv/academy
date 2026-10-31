@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Haviv Academy">
+  <path d="M 11 8 H 17 A 3 3 0 0 1 20 11 V 26 H 32 V 38 H 20 V 53 A 3 3 0 0 1 17 56 H 11 A 3 3 0 0 1 8 53 V 11 A 3 3 0 0 1 11 8 Z" fill="#9de501"/>
+  <path d="M 32 26 H 44 V 11 A 3 3 0 0 1 47 8 H 53 A 3 3 0 0 1 56 11 V 53 A 3 3 0 0 1 53 56 H 47 A 3 3 0 0 1 44 53 V 38 H 32 Z" fill="#04bde6"/>
+</svg>

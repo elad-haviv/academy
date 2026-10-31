@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="13" fill="#edefe9"/>
+  <g transform="translate(6.4 6.4) scale(0.8)">
+    <defs>
+      <clipPath id="ftfl"><rect x="0" y="0" width="31.2" height="64"/></clipPath>
+      <clipPath id="ftfr"><rect x="32.8" y="0" width="31.200000000000003" height="64"/></clipPath>
+    </defs>
+    <path d="M 11 8 H 17 A 3 3 0 0 1 20 11 V 26 H 44 V 11 A 3 3 0 0 1 47 8 H 53 A 3 3 0 0 1 56 11 V 53 A 3 3 0 0 1 53 56 H 47 A 3 3 0 0 1 44 53 V 38 H 20 V 53 A 3 3 0 0 1 17 56 H 11 A 3 3 0 0 1 8 53 V 11 A 3 3 0 0 1 11 8 Z" fill="#9de501" clip-path="url(#ftfl)"/>
+    <path d="M 11 8 H 17 A 3 3 0 0 1 20 11 V 26 H 44 V 11 A 3 3 0 0 1 47 8 H 53 A 3 3 0 0 1 56 11 V 53 A 3 3 0 0 1 53 56 H 47 A 3 3 0 0 1 44 53 V 38 H 20 V 53 A 3 3 0 0 1 17 56 H 11 A 3 3 0 0 1 8 53 V 11 A 3 3 0 0 1 11 8 Z" fill="#04bde6" clip-path="url(#ftfr)"/>
+  </g>
+</svg>

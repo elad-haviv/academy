@@ -1,0 +1,39 @@
+/* Neutral scaffold styles. The visual language is decided in the design
+   exploration step and codified here afterwards — nothing below is a design
+   decision, only the reset and type wiring. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-ui), system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), serif;
+  line-height: 1.15;
+  margin: 0;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--font-mono), monospace;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}

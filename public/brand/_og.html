@@ -1,0 +1,53 @@
+<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700&family=IBM+Plex+Sans+Hebrew:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  html,body { margin:0; padding:0 }
+  .card {
+    width:1200px; height:630px; box-sizing:border-box; position:relative; overflow:hidden;
+    background:#edefe9; color:#151d21; font-family:'IBM Plex Sans Hebrew',system-ui,sans-serif;
+    padding:64px 80px 76px; display:flex; flex-direction:column; justify-content:space-between;
+    background-image:
+      linear-gradient(to right, rgba(21,29,33,.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(21,29,33,.05) 1px, transparent 1px);
+    background-size:32px 32px;
+  }
+  .top, .foot { display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2 }
+  .brandline { display:flex; align-items:center; gap:16px }
+  .wordmark { font-family:'Frank Ruhl Libre',serif; font-weight:700; font-size:31px; letter-spacing:-.01em }
+  .kicker { font-family:'IBM Plex Mono',monospace; font-size:15px; color:#626d74; direction:ltr }
+  .mid { position:relative; z-index:2; max-width:760px }
+  h1 { font-family:'Frank Ruhl Libre',serif; font-weight:700; font-size:70px; line-height:1.08; margin:0; letter-spacing:-.02em }
+  .sub { font-size:26px; color:#4b565c; margin:22px 0 0; max-width:28ch; line-height:1.45 }
+  .stats { display:flex; gap:40px; font-size:17px; color:#4b565c; align-items:baseline }
+  .stats span { display:inline-flex; align-items:baseline; gap:8px }
+  .stats b { font-family:'Frank Ruhl Libre',serif; font-size:28px; color:#151d21; font-weight:700 }
+  .wm { position:absolute; left:-70px; bottom:-90px; opacity:.075; z-index:1 }
+  .rule { position:absolute; left:0; right:0; bottom:0; height:10px;
+          background:linear-gradient(90deg,#3df5a7 0%,#26b9c1 48%,#096fe0 100%) }
+</style>
+<div class="card">
+  <div class="top">
+    <div class="brandline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="84" height="84" aria-hidden="true">
+  <defs>
+    <clipPath id="ml"><rect x="0" y="0" width="31.2" height="64"/></clipPath>
+    <clipPath id="mr"><rect x="32.8" y="0" width="31.200000000000003" height="64"/></clipPath>
+  </defs>
+  <path d="M 11 8 H 17 A 3 3 0 0 1 20 11 V 26 H 44 V 11 A 3 3 0 0 1 47 8 H 53 A 3 3 0 0 1 56 11 V 53 A 3 3 0 0 1 53 56 H 47 A 3 3 0 0 1 44 53 V 38 H 20 V 53 A 3 3 0 0 1 17 56 H 11 A 3 3 0 0 1 8 53 V 11 A 3 3 0 0 1 11 8 Z" fill="#9de501" clip-path="url(#ml)"/>
+  <path d="M 11 8 H 17 A 3 3 0 0 1 20 11 V 26 H 44 V 11 A 3 3 0 0 1 47 8 H 53 A 3 3 0 0 1 56 11 V 53 A 3 3 0 0 1 53 56 H 47 A 3 3 0 0 1 44 53 V 38 H 20 V 53 A 3 3 0 0 1 17 56 H 11 A 3 3 0 0 1 8 53 V 11 A 3 3 0 0 1 11 8 Z" fill="#04bde6" clip-path="url(#mr)"/>
+</svg>
+<span class="wordmark">Haviv Academy</span></div>
+    <span class="kicker">academy.haviv.pro</span>
+  </div>
+  <div class="mid">
+    <h1>ללמוד את מה<br>שעובד בשטח</h1>
+    <p class="sub">קורסים, מדריכים ומעבדות אינטראקטיביות — בהנדסה, בחשמל ובפיתוח תוכנה.</p>
+  </div>
+  <div class="foot">
+    <div class="stats">
+      <span>קורסים<b>3</b></span><span>שיעורים<b>17</b></span><span>מעבדות<b>2</b></span><span>מדריכים<b>5</b></span>
+    </div>
+    <span class="kicker" style="color:#4b565c">אקדמיית חביב</span>
+  </div>
+  <div class="rule"></div>
+</div></html>
