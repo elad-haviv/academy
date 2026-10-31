@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SiteFooter } from '@/components/Sections';
+import { PricingRailFocus } from '@/components/PricingRailFocus';
 
 export const metadata = { title: 'Pricing — Haviv Academy' };
 
@@ -36,6 +37,7 @@ export default function EnPricing() {
         </header>
 
         <p className="plans-hint">Swipe through the plans</p>
+        <PricingRailFocus />
         <div className="plans en-plans">
           <div className="plan">
             <b className="name">Free</b>

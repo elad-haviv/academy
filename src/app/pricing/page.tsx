@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/Sections';
+import { PricingRailFocus } from '@/components/PricingRailFocus';
 
 export const metadata = {
   title: 'תמחור',
@@ -43,6 +44,7 @@ export default function PricingPage() {
         </header>
 
         <p className="plans-hint">החליקו בין המסלולים</p>
+        <PricingRailFocus />
         <div className="plans">
           <div className="plan">
             <b className="name">חינם</b>
