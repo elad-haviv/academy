@@ -332,7 +332,10 @@ footer { border-top: 1px solid var(--ink); background: var(--tint); padding: 28p
 .auth-alt a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 
 .form { display: flex; flex-direction: column; gap: 14px; }
-.form label { display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--soft); }
+.form label { display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; letter-spacing: 0; color: var(--soft); }
+/* Hebrew must not inherit the mono/uppercase label treatment: the mono face has
+   no Hebrew, and letter-spacing splits the letters ("אימי ל"). */
+.form input[type='email'] { direction: ltr; text-align: end; }
 .form input, .form textarea { font-family: var(--ui); font-size: 15px; color: var(--ink); background: var(--paper); border: 1px solid var(--line); padding: 10px 12px; border-radius: 0; width: 100%; }
 .form input:focus, .form textarea:focus { outline: 2px solid var(--blue); outline-offset: 1px; border-color: var(--blue); }
 .form .btn { align-self: flex-start; }
