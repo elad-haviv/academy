@@ -19,15 +19,22 @@ ENV NODE_ENV=production \
     HOSTNAME=0.0.0.0 \
     ACADEMY_DATA_DIR=/data
 
-RUN addgroup -S -g 1001 academy && adduser -S -u 1001 -G academy academy \
+RUN apk add --no-cache su-exec \
+ && addgroup -S -g 1001 academy && adduser -S -u 1001 -G academy academy \
  && mkdir -p /data && chown -R academy:academy /data
 
 COPY --from=build --chown=academy:academy /app/.next/standalone ./
 COPY --from=build --chown=academy:academy /app/.next/static ./.next/static
 COPY --from=build --chown=academy:academy /app/public ./public
+# Labs and courses are read from disk at request time — they must exist in the
+# runtime image, not only at build time.
+COPY --from=build --chown=academy:academy /app/content ./content
 
-USER academy
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 3000
 VOLUME ["/data"]
 
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "server.js"]
