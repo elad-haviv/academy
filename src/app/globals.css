@@ -397,13 +397,36 @@ footer { border-top: 1px solid var(--ink); background: var(--tint); padding: 28p
 .plan .name { overflow-wrap: normal; word-break: keep-all; }
 .plan-tag { position: absolute; inset-inline-end: 18px; top: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; background: var(--ink); color: #fff; padding: 3px 8px; }
 
-/* pricing must stack: this rule has to come AFTER the base .plans declaration */
+/* swipe affordance: only on the carousel viewport (base rule must precede the media query) */
+.plans-hint { display: none; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; color: var(--soft); margin: 0 0 8px; }
+
+/* Mobile: the three plans become a swipeable snap gallery (RTL-aware) */
 @media (max-width: 900px) {
-  .plans { grid-template-columns: 1fr; }
-  .plan { padding: 22px 18px; }
+  .plans {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 84%;
+    gap: 12px;
+    background: transparent;
+    border: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-block: 4px 12px;
+  }
+  .plans::-webkit-scrollbar { display: none; }
+  .plan { scroll-snap-align: start; border: 1px solid var(--line); padding: 22px 18px; }
+  .plan-hi { border-color: var(--ink); border-width: 2px; }
   .plan .pnum { font-size: 34px; }
   .plan .btn { align-self: stretch; text-align: center; }
   .plan-hi { padding-top: 52px; }
+  .plans-hint { display: block; }
 }
 
 .faq { margin-top: 40px; max-width: 780px; }

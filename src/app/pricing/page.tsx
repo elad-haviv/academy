@@ -42,6 +42,7 @@ export default function PricingPage() {
           </p>
         </header>
 
+        <p className="plans-hint">החליקו בין המסלולים</p>
         <div className="plans">
           <div className="plan">
             <b className="name">חינם</b>

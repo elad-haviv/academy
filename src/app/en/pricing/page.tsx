@@ -35,6 +35,7 @@ export default function EnPricing() {
           </p>
         </header>
 
+        <p className="plans-hint">Swipe through the plans</p>
         <div className="plans en-plans">
           <div className="plan">
             <b className="name">Free</b>
