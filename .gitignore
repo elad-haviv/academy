@@ -1,9 +1,24 @@
+# dependencies
 node_modules/
+.pnp.*
+.yarn/
+
+# builds
 .next/
-data/
-*.log
-.env
-.env.local
-.DS_Store
+out/
+build/
+dist/
+*.tsbuildinfo
 next-env.d.ts
-tsconfig.tsbuildinfo
+
+# data volume (SQLite: users, enrollments, completions) — never commit
+data/
+
+# local env / secrets
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+*.log
