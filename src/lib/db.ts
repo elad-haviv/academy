@@ -245,7 +245,81 @@ CREATE TABLE IF NOT EXISTS waitlist (
   source     TEXT NOT NULL DEFAULT 'pricing',
   created_at TEXT NOT NULL
 );
+
+/* ---- permissions: custom roles, capabilities, per-user overrides ---- */
+
+CREATE TABLE IF NOT EXISTS roles (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  slug        TEXT NOT NULL UNIQUE,
+  name        TEXT NOT NULL,
+  description TEXT NOT NULL DEFAULT '',
+  is_system   INTEGER NOT NULL DEFAULT 0,
+  created_at  TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS capabilities (
+  key   TEXT PRIMARY KEY,
+  label TEXT NOT NULL,
+  grp   TEXT NOT NULL DEFAULT 'content'
+);
+
+CREATE TABLE IF NOT EXISTS role_capabilities (
+  role_id    INTEGER NOT NULL REFERENCES roles(id) ON DELETE CASCADE,
+  capability TEXT NOT NULL REFERENCES capabilities(key) ON DELETE CASCADE,
+  PRIMARY KEY (role_id, capability)
+);
+
+CREATE TABLE IF NOT EXISTS user_roles (
+  user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  role_id    INTEGER NOT NULL REFERENCES roles(id) ON DELETE CASCADE,
+  granted_by INTEGER REFERENCES users(id) ON DELETE SET NULL,
+  created_at TEXT NOT NULL,
+  PRIMARY KEY (user_id, role_id)
+);
+
+/* allow=1 grants a capability the roles do not give; allow=0 revokes one they do. */
+CREATE TABLE IF NOT EXISTS user_capabilities (
+  user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  capability TEXT NOT NULL REFERENCES capabilities(key) ON DELETE CASCADE,
+  allow      INTEGER NOT NULL,
+  granted_by INTEGER REFERENCES users(id) ON DELETE SET NULL,
+  created_at TEXT NOT NULL,
+  PRIMARY KEY (user_id, capability)
+);
+
+CREATE TABLE IF NOT EXISTS reviews_queue (
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  subject_type TEXT NOT NULL,
+  subject_id   TEXT NOT NULL,
+  submitted_by INTEGER REFERENCES users(id) ON DELETE SET NULL,
+  status       TEXT NOT NULL DEFAULT 'pending',
+  note         TEXT NOT NULL DEFAULT '',
+  reviewed_by  INTEGER REFERENCES users(id) ON DELETE SET NULL,
+  created_at   TEXT NOT NULL,
+  reviewed_at  TEXT
+);
+CREATE INDEX IF NOT EXISTS reviews_queue_open ON reviews_queue(status, created_at);
 `;
+
+/* Additive column migrations for volumes created before a column existed.
+   SQLite has no IF NOT EXISTS for columns, so each runs and may fail once. */
+const MIGRATIONS = [
+  `ALTER TABLE courses ADD COLUMN author_id INTEGER`,
+  `ALTER TABLE courses ADD COLUMN origin TEXT NOT NULL DEFAULT 'seed'`,
+  `ALTER TABLE courses ADD COLUMN updated_at TEXT`,
+  `ALTER TABLE lessons ADD COLUMN author_id INTEGER`,
+  `ALTER TABLE lessons ADD COLUMN origin TEXT NOT NULL DEFAULT 'seed'`,
+  `ALTER TABLE tutorials ADD COLUMN author_id INTEGER`,
+  `ALTER TABLE tutorials ADD COLUMN origin TEXT NOT NULL DEFAULT 'seed'`,
+  `ALTER TABLE tutorials ADD COLUMN status TEXT NOT NULL DEFAULT 'published'`,
+  `ALTER TABLE tutorials ADD COLUMN updated_at TEXT`,
+  `ALTER TABLE labs ADD COLUMN author_id INTEGER`,
+  `ALTER TABLE labs ADD COLUMN repo_url TEXT`,
+  `ALTER TABLE labs ADD COLUMN repo_ref TEXT`,
+  `ALTER TABLE labs ADD COLUMN validation_state TEXT NOT NULL DEFAULT 'unverified'`,
+  `ALTER TABLE labs ADD COLUMN last_validated_ref TEXT`,
+  `ALTER TABLE labs ADD COLUMN updated_at TEXT`,
+];
 
 function open(): DatabaseSync {
   fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -254,6 +328,13 @@ function open(): DatabaseSync {
   db.exec('PRAGMA foreign_keys = ON');
   db.exec('PRAGMA busy_timeout = 5000');
   db.exec(SCHEMA);
+  for (const sql of MIGRATIONS) {
+    try {
+      db.exec(sql);
+    } catch {
+      /* column already exists on this volume */
+    }
+  }
   return db;
 }
 

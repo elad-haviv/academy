@@ -84,13 +84,15 @@ export function allTutorials(): Omit<Tutorial, 'body'>[] {
   return db()
     .prepare(
       `SELECT slug, title, excerpt, tags, level, minutes, published, '' AS body, category
-         FROM tutorials ORDER BY published DESC`,
+         FROM tutorials WHERE status = 'published' ORDER BY published DESC`,
     )
     .all() as unknown as Omit<Tutorial, 'body'>[];
 }
 
 export function getTutorial(slug: string): Tutorial | null {
-  const row = db().prepare('SELECT * FROM tutorials WHERE slug = ?').get(slug);
+  const row = db()
+    .prepare("SELECT * FROM tutorials WHERE slug = ? AND status = 'published'")
+    .get(slug);
   return (row as Tutorial | undefined) ?? null;
 }
 

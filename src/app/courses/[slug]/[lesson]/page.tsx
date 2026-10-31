@@ -5,7 +5,7 @@ import { SiteFooter } from '@/components/Sections';
 import { courseLessons, getCourse, getLesson, isComplete } from '@/lib/content';
 import { currentUser } from '@/lib/auth';
 import { canAccess, preview } from '@/lib/access';
-import { renderMarkdown, previewMarkdown } from '@/lib/markdown';
+import { previewRich, renderRich } from '@/lib/markdown';
 import { duration } from '@/lib/format';
 import { completeLessonAction } from '../../../actions';
 
@@ -85,11 +85,11 @@ export default async function LessonPage({
             {done === '1' && <p className="notice">השיעור סומן כהושלם. ממשיכים לבא.</p>}
 
             {unlocked ? (
-              <div className="prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(item.body) }} />
+              <div className="prose" dangerouslySetInnerHTML={{ __html: renderRich(item.body) }} />
             ) : (
               <>
                 <div className="prose prose-preview">
-                  <div dangerouslySetInnerHTML={{ __html: previewMarkdown(item.body) }} />
+                  <div dangerouslySetInnerHTML={{ __html: previewRich(item.body) }} />
                 </div>
                 <div className="paywall">
                   <b>עד כאן החינם</b>

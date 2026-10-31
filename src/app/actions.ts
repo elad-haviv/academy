@@ -15,6 +15,7 @@ import {
   SESSION_COOKIE,
 } from '@/lib/auth';
 import { grantTrial } from '@/lib/access';
+import { promoteBootstrapAdmin } from '@/lib/rbac';
 import { cookies } from 'next/headers';
 
 function fail(path: string, code: string): never {
@@ -33,6 +34,7 @@ export async function registerAction(formData: FormData) {
   if (findUserByEmail(email)) fail('/register', 'exists');
 
   const id = createUser(email, name, password);
+  promoteBootstrapAdmin(id, email);
   grantTrial(id); // 7 days, no card required
   const token = createSession(id);
   await setSessionCookie(token);
@@ -47,6 +49,7 @@ export async function loginAction(formData: FormData) {
 
   const user = findUserByEmail(email);
   if (!user || !verifyPassword(password, user.password_hash)) fail('/login', 'credentials');
+  promoteBootstrapAdmin(user.id, user.email);
 
   const token = createSession(user.id);
   await setSessionCookie(token);

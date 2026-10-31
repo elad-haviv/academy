@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/Sections';
 import { getTutorial, allTutorials } from '@/lib/content';
-import { renderMarkdown } from '@/lib/markdown';
+import { renderRich } from '@/lib/markdown';
 import { duration, heDate } from '@/lib/format';
 
 export const dynamic = 'force-dynamic';
@@ -48,7 +48,7 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
           </p>
           <h1>{t.title}</h1>
           <p className="lede">{t.excerpt}</p>
-          <div className="prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(t.body) }} />
+          <div className="prose" dangerouslySetInnerHTML={{ __html: renderRich(t.body) }} />
         </article>
 
         <aside className="article-foot">

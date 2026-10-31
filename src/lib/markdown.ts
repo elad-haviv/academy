@@ -126,6 +126,98 @@ export function renderMarkdown(src: string): string {
   return out.join('\n');
 }
 
+/* ---- rich text from the studio editor: allowlist, never raw pass-through ---- */
+
+const ALLOWED_TAGS = new Set([
+  'p','br','strong','b','em','i','u','s','h2','h3','h4','blockquote',
+  'ul','ol','li','code','pre','a','hr','div','span',
+]);
+
+const ALLOWED_ATTRS: Record<string, Set<string>> = {
+  a: new Set(['href', 'title']),
+  div: new Set(['data-align']),
+  span: new Set(['data-mark']),
+};
+
+function safeHref(raw: string): string | null {
+  const v = raw.trim();
+  if (/^(https?:\/\/|\/|mailto:)/i.test(v) && !/^\s*javascript:/i.test(v)) return v;
+  return null;
+}
+
+/**
+ * Tokenise the editor HTML and rebuild it from an allowlist. Unknown tags are
+ * dropped (their text is kept), attributes are dropped unless whitelisted, and
+ * link targets must be http(s), mailto or site-relative.
+ */
+export function sanitizeHtml(src: string): string {
+  const out: string[] = [];
+  const re = /<\/?([a-zA-Z0-9]+)([^>]*)>|([^<]+)/g;
+  let m: RegExpExecArray | null;
+
+  while ((m = re.exec(src)) !== null) {
+    const [whole, rawName, rawAttrs, text] = m;
+    if (text !== undefined) {
+      out.push(escapeHtml(text));
+      continue;
+    }
+    const name = (rawName || '').toLowerCase();
+    if (!ALLOWED_TAGS.has(name)) continue;
+
+    if (whole.startsWith('</')) {
+      if (!['br', 'hr'].includes(name)) out.push(`</${name}>`);
+      continue;
+    }
+
+    const allowed = ALLOWED_ATTRS[name] ?? new Set<string>();
+    const parts: string[] = [];
+    const attrRe = /([a-zA-Z-]+)\s*=\s*("([^"]*)"|'([^']*)')/g;
+    let a: RegExpExecArray | null;
+    while ((a = attrRe.exec(rawAttrs || '')) !== null) {
+      const key = a[1].toLowerCase();
+      const value = a[3] ?? a[4] ?? '';
+      if (!allowed.has(key)) continue;
+      if (key === 'href') {
+        const href = safeHref(value);
+        if (!href) continue;
+        parts.push(`href="${escapeHtml(href)}" rel="noopener"`);
+      } else if (key === 'title') {
+        parts.push(`title="${escapeHtml(value)}"`);
+      } else if (key === 'data-align' && /^(start|center|end)$/.test(value)) {
+        parts.push(`data-align="${value}"`);
+      } else if (key === 'data-mark' && /^[a-z-]{1,20}$/.test(value)) {
+        parts.push(`data-mark="${value}"`);
+      }
+    }
+    out.push(`<${name}${parts.length ? ' ' + parts.join(' ') : ''}>`);
+  }
+  return out.join('');
+}
+
+/** Bodies come from two places: markdown seed files and the studio editor. */
+export function renderRich(src: string): string {
+  return /^\s*</.test(src) ? sanitizeHtml(src) : renderMarkdown(src);
+}
+
+/** Preview text for a paywall/teaser: strip tags, then cut on a sentence. */
+export function previewRich(src: string, limit = 1200): string {
+  if (/^\s*</.test(src)) {
+    const text = sanitizeHtml(src)
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (text.length <= limit) return `<p>${escapeHtml(text)}</p>`;
+    const cut = text.slice(0, limit);
+    const stop = cut.lastIndexOf('. ');
+    return `<p>${escapeHtml((stop > limit * 0.6 ? cut.slice(0, stop + 1) : cut).trim())}…</p>`;
+  }
+  return previewMarkdown(src, limit);
+}
+
 export function plainText(src: string): string {
   return src
     .replace(/```[\s\S]*?```/g, ' ')
