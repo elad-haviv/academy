@@ -183,15 +183,6 @@ h1 em { font-style: normal; background: var(--grad); -webkit-background-clip: te
 
 /* ---- pricing ---- */
 .price { padding: 44px 0; }
-.plans { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 16px; }
-.plan { position: relative; background: #fff; border: 1px solid var(--line); padding: 20px; }
-.plan-hi { border: 2px solid var(--ink); overflow: hidden; }
-.plan-hi::before { content: ''; position: absolute; inset-inline: 0; top: 0; height: 3px; background: var(--grad); }
-.plan-tag { position: absolute; top: 0; inset-inline-end: 0; background: var(--ink); color: #fff; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; padding: 4px 10px; }
-.plan b.name { display: block; font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-.pnum { display: inline-block; margin-top: 10px; font-family: var(--mono); font-size: 34px; font-weight: 500; unicode-bidi: isolate; }
-.per { font-size: 12px; color: var(--soft); margin-inline-start: 6px; }
-.plan p { font-size: 13.5px; color: var(--soft); margin: 8px 0 16px; }
 
 /* ---- employer band ---- */
 .employer { padding: 40px 0; }
@@ -402,7 +393,18 @@ footer { border-top: 1px solid var(--ink); background: var(--tint); padding: 28p
 .plan .per { font-size: 12.5px; color: var(--soft); }
 .plan p { font-size: 14px; color: var(--soft); margin: 10px 0 18px; }
 .plan .btn { margin-top: auto; align-self: flex-start; }
+.plan-hi { padding-top: 52px; }
+.plan .name { overflow-wrap: normal; word-break: keep-all; }
 .plan-tag { position: absolute; inset-inline-end: 18px; top: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; background: var(--ink); color: #fff; padding: 3px 8px; }
+
+/* pricing must stack: this rule has to come AFTER the base .plans declaration */
+@media (max-width: 900px) {
+  .plans { grid-template-columns: 1fr; }
+  .plan { padding: 22px 18px; }
+  .plan .pnum { font-size: 34px; }
+  .plan .btn { align-self: stretch; text-align: center; }
+  .plan-hi { padding-top: 52px; }
+}
 
 .faq { margin-top: 40px; max-width: 780px; }
 .faq details { border-bottom: 1px solid var(--line); padding: 14px 0; }
