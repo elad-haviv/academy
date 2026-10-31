@@ -1,0 +1,24 @@
+{
+  "slug": "agl-field-course",
+  "title": "קורס שדה AGL",
+  "subtitle": "תאורת מסלולים: איתור קצר והפסקה בכבל סדרתי תחת מתח",
+  "vertical": "airfield-lighting",
+  "kind": "simulator",
+  "status": "published",
+  "entitlement": "lab:agl-field-course",
+  "embedUrl": "/lab-content/agl/index.html",
+  "correctnessOwner": "Elad Haviv",
+  "validatedOn": "2026-09-14",
+  "cover": "/img/cover-agl.png",
+  "learnerRoles": ["חשמלאי שדה", "טכנאי תחזוקת מסלולים", "מכונאי מערכות תאורה"],
+  "buyerRoles": ["מחלקת תחזוקה בנמל תעופה", "קבלן חשמל", "מכללה מקצועית"],
+  "outcomes": [
+    "איתור קצר מול הארקה במעגל סדרתי",
+    "החלפת שנאי זרם ללא כיבוי המסלול",
+    "קריאת מדידות תחת עומס וזיהוי קטע חשוד"
+  ],
+  "failureModes": ["ניתוק יתר שמחשיך שני קטעים", "החלפת שנאי תחת עומס שגוי", "פירוש שגוי של נפילת מתח"],
+  "prerequisites": ["חשמל בסיסי", "היכרות עם מעגל סדרתי"],
+  "minutes": 90,
+  "position": 1
+}

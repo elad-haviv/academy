@@ -1,19 +1,50 @@
-import { db, DB_FILE } from '@/lib/db';
+import Link from 'next/link';
+import { Hero } from '@/components/Hero';
+import { LabCard } from '@/components/LabCard';
+import { SiteHeader } from '@/components/SiteHeader';
+import { Shelf, Steps } from '@/components/Shelf';
+import { EmployerBand, Pricing, SiteFooter } from '@/components/Sections';
+import { loadLabs } from '@/lib/labs';
+import { countRows, listCourses } from '@/lib/courses';
 
 export const dynamic = 'force-dynamic';
 
 export default function Home() {
-  const row = db().prepare('SELECT count(*) AS n FROM labs').get() as { n: number };
+  const labs = loadLabs();
+  const labSlugs = new Set(labs.map((l) => l.slug));
+  const courses = listCourses().filter((c) => !labSlugs.has(c.slug));
+  const totals = {
+    labs: labs.length,
+    lessons: countRows('lessons'),
+    tutorials: countRows('tutorials'),
+  };
 
   return (
-    <main style={{ maxWidth: 720, margin: '0 auto', padding: '96px 24px' }}>
-      <h1 style={{ fontSize: 40 }}>Haviv Academy</h1>
-      <p style={{ fontSize: 20 }}>
-        מעבדות שאפשר להפעיל, לשבור, ולאבחן.
-      </p>
-      <p style={{ opacity: 0.6, fontSize: 14 }}>
-        scaffold v2 · database {DB_FILE} · labs {row.n}
-      </p>
-    </main>
+    <>
+      <SiteHeader current="labs" />
+      <main>
+        <Hero totals={totals} />
+
+        <section className="wrap labs">
+          <div className="sec-head">
+            <h2>המעבדות</h2>
+            <Link className="sec-link" href="/labs">
+              כל המעבדות ›
+            </Link>
+          </div>
+          <div className="lab-grid">
+            {labs.map((lab) => (
+              <LabCard key={lab.slug} lab={lab} />
+            ))}
+          </div>
+        </section>
+
+        <Steps />
+        <Shelf courses={courses} />
+        <Pricing />
+        <EmployerBand />
+      </main>
+      <SiteFooter />
+    </>
   );
 }

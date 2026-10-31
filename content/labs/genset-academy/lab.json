@@ -1,0 +1,24 @@
+{
+  "slug": "genset-academy",
+  "title": "Genset Academy",
+  "subtitle": "הפעלת גנרטור ומעבר בין רשת לגנרטור בלי להפיל את המערכת",
+  "vertical": "gensets",
+  "kind": "simulator",
+  "status": "in-development",
+  "entitlement": "lab:genset-academy",
+  "embedUrl": null,
+  "correctnessOwner": "Elad Haviv",
+  "validatedOn": null,
+  "cover": "/img/cover-genset.png",
+  "learnerRoles": ["טכנאי גנרטורים", "חשמלאי תעשייתי", "אחראי אחזקה"],
+  "buyerRoles": ["מחלקת תחזוקה בנמל תעופה", "אתר תעשייתי", "מכללה מקצועית"],
+  "outcomes": [
+    "רצף התנעה והגנות",
+    "ניתוק עומסים ומעבר מקור",
+    "אבחון רעידות וטמפרטורה"
+  ],
+  "failureModes": ["מעבר מקור ללא ניתוק עומס", "התעלמות מהגנת שמן", "הפעלה חוזרת על עומס יתר"],
+  "prerequisites": ["חשמל בסיסי", "מכונות"],
+  "minutes": 75,
+  "position": 2
+}
